@@ -3,131 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phoe Ree Trading Analytics</title>
+    <title>Phoe Ree - BTC Strategy</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <!-- TradingView Widget Script -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
-        body { background-color: #0b0e11; color: #eaecef; font-family: 'Inter', sans-serif; }
-        .glass-panel { background: rgba(30, 32, 38, 0.7); backdrop-filter: blur(10px); border: 1px solid #303339; }
-        #chart-container { height: 500px; width: 100%; }
+        body { background-color: #0b0e11; color: #eaecef; font-family: sans-serif; }
+        .stats-card { background: #1e2026; border: 1px solid #303339; border-radius: 12px; }
+        #custom-overlay { 
+            position: absolute; top: 10px; left: 10px; z-index: 10; 
+            background: rgba(0,0,0,0.7); padding: 10px; border-radius: 8px;
+        }
     </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="max-w-7xl mx-auto">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+<body class="p-2 md:p-6">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-4">
             <div>
-                <h1 class="text-3xl font-bold text-yellow-500">BTC/USDT Live</h1>
-                <p class="text-gray-400">Phoe Ree's Custom Strategy Dashboard</p>
+                <h1 class="text-2xl font-bold text-yellow-500">BTC/USDT Strategy</h1>
+                <p class="text-xs text-gray-400">By ကိုဟန်သာ (Phoe Ree)</p>
             </div>
-            <div class="glass-panel p-4 rounded-xl flex items-center gap-6">
-                <div class="text-center">
-                    <p class="text-xs text-gray-500 uppercase">Live Price</p>
-                    <p id="current-price" class="text-2xl font-mono font-bold text-green-500">Connecting...</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-xs text-gray-500 uppercase">Signal</p>
-                    <p id="prediction-signal" class="text-xl font-bold text-yellow-400">WAIT</p>
-                </div>
+            <div class="stats-card px-4 py-2 text-right">
+                <span class="text-xs text-gray-500 block">SIGNAL</span>
+                <span id="signal-text" class="text-xl font-bold text-green-400 animate-pulse">ANALYZING...</span>
             </div>
-        </header>
+        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <div class="lg:col-span-3 glass-panel rounded-2xl p-4">
-                <div id="chart-container"></div>
-            </div>
-            <div class="flex flex-col gap-6">
-                <div class="glass-panel p-5 rounded-2xl">
-                    <h2 class="text-lg font-bold mb-4">Zones</h2>
-                    <p class="text-xs text-red-400 font-bold">RESISTANCE: <span id="res-zone" class="text-white">---</span></p>
-                    <p class="text-xs text-green-400 font-bold mt-2">SUPPORT: <span id="sup-zone" class="text-white">---</span></p>
+        <!-- Main Chart Area -->
+        <div class="relative w-full aspect-video md:h-[550px] stats-card overflow-hidden">
+            <!-- Custom Strategy Indicators Overlay -->
+            <div id="custom-overlay" class="text-[10px] md:text-xs space-y-1">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span>BIG CANDLE = GREEN (BUY)</span>
                 </div>
-                <div class="glass-panel p-5 rounded-2xl h-64 overflow-hidden">
-                    <h2 class="text-lg font-bold mb-4">Signal Log</h2>
-                    <div id="signal-log" class="text-xs space-y-2 overflow-y-auto h-40"></div>
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                    <span>SMALL CANDLE = RED (SELL/WAIT)</span>
                 </div>
             </div>
+            
+            <!-- TradingView Chart Container -->
+            <div id="tradingview_chart" class="h-full w-full"></div>
+        </div>
+
+        <!-- Support & Resistance Analysis -->
+        <div class="grid grid-cols-2 gap-4 mt-4">
+            <div class="stats-card p-4 border-l-4 border-red-500">
+                <p class="text-xs text-gray-400">RESISTANCE (Target)</p>
+                <p id="res-val" class="text-lg font-mono font-bold text-red-400">Loading...</p>
+            </div>
+            <div class="stats-card p-4 border-l-4 border-green-500">
+                <p class="text-xs text-gray-400">SUPPORT (Entry)</p>
+                <p id="sup-val" class="text-lg font-mono font-bold text-green-400">Loading...</p>
+            </div>
+        </div>
+
+        <!-- Strategy Description -->
+        <div class="mt-4 stats-card p-4">
+            <h3 class="text-sm font-bold text-yellow-500 mb-2">Technical Analysis Summary</h3>
+            <p class="text-xs text-gray-300 leading-relaxed">
+                ဤ Chart သည် Binance Real-time data ကို အသုံးပြုထားသည်။ 
+                Support Line အနီးတွင် Big Candle (Green) ပေါ်လာပါက အဝယ်ဘက်မှ လိုက်ရန် သင့်တော်သည်။ 
+                Resistance အနီးတွင် Candle သေးငယ်သွားပါက (Red) Profit Take လုပ်ရန် သတိပြုပါ။
+            </p>
         </div>
     </div>
 
-    <script>
-        const symbol = 'btcusdt';
-        const chartElement = document.getElementById('chart-container');
-        let chart, candlestickSeries;
+    <script type="text/javascript">
+        // Chart ကို တည်ဆောက်ခြင်း
+        new TradingView.widget({
+            "width": "100%",
+            "height": "100%",
+            "symbol": "BINANCE:BTCUSDT",
+            "interval": "1",
+            "timezone": "Asia/Yangon",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": false,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "container_id": "tradingview_chart"
+        });
 
-        function initChart() {
-            chart = LightweightCharts.createChart(chartElement, {
-                layout: { backgroundColor: '#131722', textColor: '#d1d4dc' },
-                grid: { vertLines: { color: '#1f2226' }, horzLines: { color: '#1f2226' } },
-                timeScale: { timeVisible: true, secondsVisible: false }
-            });
-            candlestickSeries = chart.addCandlestickSeries();
-            fetchData();
-        }
-
-        async function fetchData() {
+        // ဈေးနှုန်းဒေတာများကို ပုံဖော်ရန်
+        async function updateLevels() {
             try {
-                // အလုပ်လုပ်နိုင်ခြေအရှိဆုံး API Endpoint ကို သုံးထားပါတယ်
-                const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol.toUpperCase()}&interval=1m&limit=100`);
-                const data = await response.json();
-                const formattedData = data.map(d => ({
-                    time: d[0] / 1000,
-                    open: parseFloat(d[1]),
-                    high: parseFloat(d[2]),
-                    low: parseFloat(d[3]),
-                    close: parseFloat(d[4])
-                }));
+                // Binance API ကနေ လတ်တလော ဈေးနှုန်းယူမယ်
+                const res = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT');
+                const data = await res.json();
                 
-                // Color Logic
-                const coloredData = formattedData.map(d => {
-                    const diff = Math.abs(d.close - d.open) / d.open;
-                    const color = diff > 0.0005 ? '#00ff00' : '#ff4444';
-                    return { ...d, color, wickColor: color };
-                });
+                const high = parseFloat(data.highPrice).toFixed(2);
+                const low = parseFloat(data.lowPrice).toFixed(2);
+                const last = parseFloat(data.lastPrice).toFixed(2);
 
-                candlestickSeries.setData(coloredData);
-                connectWebSocket();
-                
-                // Support/Resistance calculation
-                const highs = formattedData.map(d => d.high);
-                const lows = formattedData.map(d => d.low);
-                document.getElementById('res-zone').innerText = Math.max(...highs.slice(-20)).toFixed(2);
-                document.getElementById('sup-zone').innerText = Math.min(...lows.slice(-20)).toFixed(2);
+                document.getElementById('res-val').innerText = `$${high}`;
+                document.getElementById('sup-val').innerText = `$${low}`;
 
+                // Simple Signal Logic
+                const signal = document.getElementById('signal-text');
+                if (last > (parseFloat(high) - 500)) {
+                    signal.innerText = "SELL ZONE";
+                    signal.className = "text-xl font-bold text-red-500";
+                } else if (last < (parseFloat(low) + 500)) {
+                    signal.innerText = "BUY ZONE";
+                    signal.className = "text-xl font-bold text-green-500";
+                } else {
+                    signal.innerText = "HOLDING";
+                    signal.className = "text-xl font-bold text-yellow-500";
+                }
             } catch (e) {
-                console.log("Retrying with backup...");
-                setTimeout(fetchData, 5000);
+                console.log("Error fetching levels");
             }
         }
 
-        function connectWebSocket() {
-            // New 2026 Binance WebSocket Architecture
-            const ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol}@kline_1m`);
-            
-            ws.onmessage = (msg) => {
-                const data = JSON.parse(msg.data);
-                const k = data.k;
-                const close = parseFloat(k.c);
-                const open = parseFloat(k.o);
-                const diff = Math.abs(close - open) / open;
-                const color = diff > 0.0005 ? '#00ff00' : '#ff4444';
-
-                document.getElementById('current-price').innerText = `$ ${close}`;
-                
-                candlestickSeries.update({
-                    time: k.t / 1000,
-                    open: open,
-                    high: parseFloat(k.h),
-                    low: parseFloat(k.l),
-                    close: close,
-                    color: color,
-                    wickColor: color
-                });
-            };
-
-            ws.onerror = () => setTimeout(connectWebSocket, 5000);
-        }
-
-        window.onload = initChart;
+        setInterval(updateLevels, 5000);
+        updateLevels();
     </script>
 </body>
 </html>
+
