@@ -3,86 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phoe Ree AI Pro V10 - Han Thar</title>
+    <title>Phoe Ree AI Pro V11 - Binance Style</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap');
-        body { background-color: #0b0e11; color: #eaecef; font-family: 'Padauk', sans-serif; }
-        .stats-card { background: #1e2026; border: 1px solid #303339; border-radius: 12px; }
-        .tab-btn { padding: 8px 10px; border-radius: 8px; font-weight: bold; cursor: pointer; border: 1px solid #303339; transition: 0.2s; font-size: 11px; background: #2b2f36; text-align: center; }
+        body { background-color: #0b0e11; color: #eaecef; font-family: 'Padauk', sans-serif; overflow-x: hidden; }
+        .stats-card { background: #1e2026; border: 1px solid #303339; border-radius: 8px; }
+        .tab-btn { padding: 8px 10px; border-radius: 6px; font-weight: bold; cursor: pointer; border: 1px solid #303339; font-size: 11px; background: #2b2f36; transition: 0.2s; min-width: 65px; text-align: center; }
         .tab-active { background: #f3ba2f; color: #000; border-color: #f3ba2f; }
-        .signal-box { border-radius: 15px; padding: 12px; text-align: center; }
-        .buy-signal { background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; }
-        .sell-signal { background: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444; }
-        .price-value { font-family: 'monospace'; font-weight: 900; }
-        .news-card { border-left: 4px solid #f3ba2f; background: #16181d; padding: 12px; margin-bottom: 10px; border-radius: 4px; font-size: 13px; line-height: 1.6; }
-        .loading-shimmer { background: linear-gradient(90deg, #1e2026 25%, #2a2d35 50%, #1e2026 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .buy-box { background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; }
+        .sell-box { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; }
+        .price-font { font-family: 'monospace'; font-weight: 700; }
+        .news-item { border-bottom: 1px solid #2b2f36; padding: 12px 0; font-size: 13px; line-height: 1.5; }
+        .news-item:last-child { border-bottom: none; }
+        .shimmer { background: linear-gradient(90deg, #1e2026 25%, #2a2d35 50%, #1e2026 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
+        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     </style>
 </head>
-<body class="p-2 md:p-4">
-    <div class="max-w-6xl mx-auto">
-        <!-- Coin Selector -->
-        <div class="flex flex-wrap gap-2 mb-4 bg-[#1e2026] p-2 rounded-xl border border-gray-800 justify-center">
-            <div onclick="changeCoin('BTCUSDT', 'Bitcoin')" class="tab-btn tab-active" id="btn-BTCUSDT">BTC</div>
-            <div onclick="changeCoin('BNBUSDT', 'Binance')" class="tab-btn" id="btn-BNBUSDT">BNB</div>
-            <div onclick="changeCoin('RENDERUSDT', 'Render')" class="tab-btn" id="btn-RENDERUSDT">RENDER</div>
-            <div onclick="changeCoin('TIAUSDT', 'Celestia')" class="tab-btn" id="btn-TIAUSDT">TIA</div>
-            <div onclick="changeCoin('PAXGUSDT', 'Gold')" class="tab-btn" id="btn-PAXGUSDT">PAXG</div>
-        </div>
-
-        <!-- Strategic Prices Area -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-            <div class="stats-card p-4 flex flex-col items-center border-t-4 border-yellow-500">
-                <span class="text-[10px] text-gray-400 font-bold uppercase mb-1">Live Price (လက်ရှိဈေး)</span>
-                <div id="live-price" class="text-3xl price-value text-white">$ --,---</div>
-                <div id="price-percent" class="text-xs font-bold mt-1">--%</div>
-            </div>
-            <div class="signal-box buy-signal">
-                <span class="text-[10px] text-green-500 font-bold uppercase block mb-1">Buy Entry (ဝယ်သင့်သည့်ဈေး)</span>
-                <div id="target-buy" class="text-3xl price-value text-white">$ --,---</div>
-            </div>
-            <div class="signal-box sell-signal">
-                <span class="text-[10px] text-red-500 font-bold uppercase block mb-1">Sell Target (ရောင်းသင့်သည့်ဈေး)</span>
-                <div id="target-sell" class="text-3xl price-value text-white">$ --,---</div>
+<body class="p-2">
+    <div class="max-w-7xl mx-auto">
+        <!-- Coin Selector & Header -->
+        <div class="flex flex-wrap items-center justify-between bg-[#1e2026] p-3 rounded-lg border border-gray-800 mb-3 gap-3">
+            <h1 class="text-lg font-bold text-[#f3ba2f]">PHOE REE V11</h1>
+            <div id="coin-tabs" class="flex flex-wrap gap-2">
+                <div onclick="changeCoin('BTCUSDT', 'Bitcoin')" class="tab-btn tab-active" id="btn-BTCUSDT">BTC</div>
+                <div onclick="changeCoin('BNBUSDT', 'Binance')" class="tab-btn" id="btn-BNBUSDT">BNB</div>
+                <div onclick="changeCoin('RENDERUSDT', 'Render')" class="tab-btn" id="btn-RENDERUSDT">RENDER</div>
+                <div onclick="changeCoin('TIAUSDT', 'Celestia')" class="tab-btn" id="btn-TIAUSDT">TIA</div>
+                <div onclick="changeCoin('PAXGUSDT', 'Gold')" class="tab-btn" id="btn-PAXGUSDT">PAXG</div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <!-- Left: Chart & AI -->
-            <div class="lg:col-span-2 space-y-4">
-                <div class="stats-card h-[450px] overflow-hidden">
-                    <div id="tv_chart" class="h-full w-full"></div>
-                </div>
-                <div class="stats-card p-4">
-                    <h2 class="text-sm font-bold text-yellow-500 mb-2 flex items-center gap-2">💡 AI Trading Insight</h2>
-                    <div id="ai-insight" class="text-sm text-gray-300 leading-relaxed min-h-[60px]">ဒေတာများကို တွက်ချက်နေပါသည်...</div>
-                </div>
+        <!-- Price & Strategy Bar -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+            <div class="stats-card p-3 flex flex-col items-center">
+                <span class="text-[10px] text-gray-400 uppercase font-bold">Live Price</span>
+                <div id="live-price" class="text-2xl price-font text-white">$ --,---</div>
+                <div id="price-percent" class="text-xs font-bold">--%</div>
             </div>
+            <div class="stats-card buy-box p-3 text-center">
+                <span class="text-[10px] text-green-500 uppercase font-bold">Buy Entry (ဝယ်ဈေး)</span>
+                <div id="target-buy" class="text-2xl price-font text-white">$ --,---</div>
+            </div>
+            <div class="stats-card sell-box p-3 text-center">
+                <span class="text-[10px] text-red-500 uppercase font-bold">Sell Target (ရောင်းဈေး)</span>
+                <div id="target-sell" class="text-2xl price-font text-white">$ --,---</div>
+            </div>
+        </div>
 
-            <!-- Right: Real-time News -->
-            <div class="space-y-4">
-                <div class="stats-card p-4 h-[580px] flex flex-col border-r-4 border-blue-500">
-                    <h3 class="text-xs font-bold text-blue-400 mb-4 flex justify-between items-center">
-                        <span>LATEST CRYPTO & US GOV NEWS</span>
-                        <span class="bg-blue-600 text-white px-2 py-0.5 rounded text-[8px] animate-pulse">LIVE UPDATE</span>
-                    </h3>
-                    <div id="news-list" class="overflow-y-auto flex-grow pr-1 space-y-3">
-                        <div class="h-16 loading-shimmer rounded-lg mb-2"></div>
-                        <div class="h-16 loading-shimmer rounded-lg mb-2"></div>
-                        <div class="h-16 loading-shimmer rounded-lg mb-2"></div>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <!-- Left: Chart & Analysis (3/4) -->
+            <div class="lg:col-span-3 space-y-4">
+                <!-- TradingView Chart with Indicators -->
+                <div class="stats-card h-[500px] overflow-hidden" id="chart-parent">
+                    <div id="tv_chart_container" class="h-full w-full"></div>
+                </div>
+
+                <!-- AI Insight -->
+                <div class="stats-card p-4 border-l-4 border-yellow-500">
+                    <div class="flex items-center gap-2 mb-2 text-yellow-500 font-bold text-sm">
+                        <span>🤖 AI Strategy Advisor</span>
                     </div>
-                    <button onclick="fetchNews()" class="mt-4 w-full py-3 bg-[#2b2f36] hover:bg-[#3b414a] rounded-lg text-xs font-bold text-white transition">
-                        🔄 သတင်းများကို အသစ်ပြန်ခေါ်ရန်
-                    </button>
+                    <div id="ai-insight" class="text-sm text-gray-300 leading-relaxed italic">
+                        ဈေးကွက်ကို သုံးသပ်နေပါသည်...
+                    </div>
                 </div>
+            </div>
+
+            <!-- Right: News (1/4) -->
+            <div class="stats-card p-4 h-[635px] flex flex-col">
+                <h3 class="text-xs font-bold text-blue-400 mb-4 border-b border-gray-800 pb-2">
+                    LATEST NEWS (US GOV & MARKET)
+                </h3>
+                <div id="news-list" class="flex-grow overflow-y-auto pr-1 space-y-3">
+                    <div class="h-14 shimmer rounded"></div>
+                    <div class="h-14 shimmer rounded"></div>
+                    <div class="h-14 shimmer rounded"></div>
+                </div>
+                <button onclick="fetchLatestNews()" class="mt-4 w-full py-2 bg-[#2b2f36] hover:bg-[#3b414a] rounded text-[10px] font-bold text-gray-300">
+                    🔄 REFRESH NEWS
+                </button>
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        const apiKey = ""; // API Key used at runtime
+        const apiKey = ""; // System assigned
         let currentSymbol = "BTCUSDT";
         let currentName = "Bitcoin";
 
@@ -90,15 +97,24 @@
             new TradingView.widget({
                 "width": "100%", "height": "100%",
                 "symbol": `BINANCE:${symbol}`,
-                "interval": "60", "theme": "dark", "style": "1",
-                "container_id": "tv_chart", "hide_side_toolbar": false,
-                "locale": "en"
+                "interval": "60", "timezone": "Asia/Yangon",
+                "theme": "dark", "style": "1", "locale": "en",
+                "container_id": "tv_chart_container",
+                "hide_side_toolbar": false,
+                "allow_symbol_change": true,
+                "studies": [
+                    "MASimple@tv-basicstudies", // Moving Average
+                    "RSI@tv-basicstudies",      // RSI
+                    "MACD@tv-basicstudies"      // MACD
+                ],
+                "show_popup_button": true,
+                "withdateranges": true
             });
         }
 
         function changeCoin(symbol, name) {
             currentSymbol = symbol; currentName = name;
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
             document.getElementById(`btn-${symbol}`).classList.add('tab-active');
             initChart(symbol);
             updateDashboard();
@@ -114,22 +130,22 @@
                 document.getElementById('live-price').innerText = `$${lastPrice.toLocaleString()}`;
                 const pc = document.getElementById('price-percent');
                 pc.innerText = `${pChange > 0 ? '+' : ''}${pChange}%`;
-                pc.className = `text-xs font-bold mt-1 ${pChange > 0 ? 'text-green-500' : 'text-red-500'}`;
+                pc.className = `text-xs font-bold ${pChange > 0 ? 'text-green-500' : 'text-red-500'}`;
 
-                // Precise Buy/Sell logic
-                const buyEntry = lastPrice * 0.985; // 1.5% drop
-                const sellTarget = lastPrice * 1.045; // 4.5% rise
+                // Strategy Targets
+                const buyEntry = lastPrice * 0.982;
+                const sellTarget = lastPrice * 1.04;
                 document.getElementById('target-buy').innerText = `$${buyEntry.toLocaleString(undefined, {maximumFractionDigits: 2})}`;
                 document.getElementById('target-sell').innerText = `$${sellTarget.toLocaleString(undefined, {maximumFractionDigits: 2})}`;
 
                 fetchAI(lastPrice, pChange);
-                fetchNews();
-            } catch (e) { console.error(e); }
+                fetchLatestNews();
+            } catch (e) {}
         }
 
         async function fetchAI(price, change) {
+            const prompt = `Current ${currentName} price is $${price} (${change}%). Give a 3-point trading summary in BURMESE for user 'Han Thar'. Short and clear.`;
             try {
-                const prompt = `Price: $${price}, Change: ${change}%. Provide a quick 3-point strategy for ${currentName} in BURMESE. Use simple terms for Han Thar.`;
                 const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -140,36 +156,29 @@
             } catch (e) {}
         }
 
-        async function fetchNews() {
+        async function fetchLatestNews() {
             const container = document.getElementById('news-list');
-            container.innerHTML = `<div class="h-16 loading-shimmer rounded-lg mb-2"></div><div class="h-16 loading-shimmer rounded-lg mb-2"></div>`;
-            
             try {
-                // Focus: US Govt, SEC, FED, Crypto Regulation on March 19, 2026
-                const newsPrompt = `Search for 5 very latest crypto market news from the last 3 hours, especially about US Government (SEC, Fed) and ${currentName}. Translate each headline into clear BURMESE. Format: Bullet points. Today is March 19, 2026.`;
-                
+                const query = `Latest crypto news March 2026, ${currentName} updates, US government SEC Fed crypto policy`;
                 const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        contents: [{ parts: [{ text: newsPrompt }] }],
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Search for 5 latest news about ${currentName} and US Government's crypto stance from the last few hours. Summarize in BURMESE. Format: Bullet points with dates.` }] }],
                         tools: [{ "google_search": {} }]
                     })
                 });
                 const d = await res.json();
                 const text = d.candidates?.[0]?.content?.parts?.[0]?.text || "";
-                const newsArray = text.split('\n').filter(l => l.trim().length > 10).slice(0, 6);
+                const items = text.split('\n').filter(l => l.trim().length > 10).slice(0, 6);
                 
-                if (newsArray.length > 0) {
-                    container.innerHTML = newsArray.map(item => {
-                        const cleanItem = item.replace(/[*#-]/g, '').trim();
-                        return `<div class="news-card">${cleanItem}</div>`;
-                    }).join('');
+                if (items.length > 0) {
+                    container.innerHTML = items.map(i => `<div class="news-item"><span class="text-yellow-500 mr-2">●</span>${i.replace(/[*#-]/g,'').trim()}</div>`).join('');
                 } else {
-                    container.innerHTML = "<p class='text-xs text-center text-gray-500 mt-20 italic'>ယနေ့အတွက် သတင်းအသစ် မတွေ့သေးပါ။ ခေတ္တစောင့်ပါ။</p>";
+                    container.innerHTML = "<p class='text-[10px] text-gray-500 italic text-center mt-20'>သတင်းအသစ်များ မတွေ့သေးပါ။</p>";
                 }
             } catch (e) {
-                container.innerHTML = "<p class='text-red-500 text-[10px] text-center mt-20'>VPN အခက်အခဲ သို့မဟုတ် Connection ကြောင့် သတင်းမတက်ပါ။ Refresh ပြန်လုပ်ပါ။</p>";
+                container.innerHTML = "<p class='text-red-500 text-[10px] text-center mt-20'>VPN အခက်အခဲရှိနိုင်ပါသည်။</p>";
             }
         }
 
