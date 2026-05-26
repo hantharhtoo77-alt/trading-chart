@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phoe Ree Futures Day Trading Master</title>
+    <title>Phoe Ree Futures Day Trading Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
@@ -16,7 +16,6 @@
         .price-font { font-family: 'monospace'; font-weight: 800; }
         .news-item { border-left: 3px solid #f3ba2f; background: #16181d; padding: 12px; margin-bottom: 12px; border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; }
         
-        /* Neon indicators */
         .neon-green { text-shadow: 0 0 10px rgba(34, 197, 94, 0.5); color: #22c55e; }
         .neon-red { text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); color: #ef4444; }
         .neon-yellow { text-shadow: 0 0 10px rgba(243, 186, 47, 0.5); color: #f3ba2f; }
@@ -36,7 +35,7 @@
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">High-Precision Scalping, Leverage Management & Market Liquidity Signals</p>
             </div>
             
-            <!-- Complete Coin Selector -->
+            <!-- Coin Selector -->
             <div id="coin-tabs" class="flex flex-wrap gap-1.5 justify-center">
                 <div onclick="changeCoin('BTCUSDT', 'Bitcoin')" class="tab-btn tab-active" id="btn-BTCUSDT">BTC</div>
                 <div onclick="changeCoin('ETHUSDT', 'Ethereum')" class="tab-btn" id="btn-ETHUSDT">ETH</div>
@@ -49,7 +48,7 @@
             </div>
         </div>
 
-        <!-- DAY TRADING STRATEGIC CONTROLS -->
+        <!-- DAY TRADING FUTURES STRATEGIC CONTROLS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4 font-bold text-center">
             <!-- 1. Futures Trend Direction (Long/Short) -->
             <div class="stats-card p-4 border-l-4 border-yellow-500 flex flex-col justify-between items-center">
@@ -58,25 +57,25 @@
                 <span class="text-[9px] text-gray-500 font-normal italic">* Market Momentum စစ်ဆေးမှု</span>
             </div>
 
-            <!-- 2. Safe Entry -->
-            <div class="stats-card p-4 border-l-4 border-green-500 bg-green-950/10 flex flex-col justify-between items-center">
-                <span class="text-[10px] text-green-400 uppercase tracking-wider">Safe Entry (ဝင်ရမည့်ဈေး)</span>
+            <!-- 2. Safe Entry (Dynamic Label based on Trend) -->
+            <div id="entry-card" class="stats-card p-4 border-l-4 border-green-500 bg-green-950/10 flex flex-col justify-between items-center">
+                <span id="entry-label" class="text-[10px] text-green-400 uppercase tracking-wider">Safe Entry (ဝင်ရမည့်ဈေး)</span>
                 <div id="target-buy" class="text-xl price-font text-green-400 my-2">$ --,---</div>
-                <span class="text-[9px] text-green-600 font-normal">* Limit Buy နေရာ</span>
+                <span class="text-[9px] text-green-600 font-normal">* Limit Order နေရာ</span>
             </div>
 
-            <!-- 3. Strict Stop Loss (Tight for Futures) -->
-            <div class="stats-card p-4 border-l-4 border-red-500 bg-red-950/10 flex flex-col justify-between items-center">
-                <span class="text-[10px] text-red-400 uppercase tracking-wider">Stop Loss (ရှုံးရင်ဖြတ်ဈေး)</span>
+            <!-- 3. Strict Stop Loss (SL) -->
+            <div id="sl-card" class="stats-card p-4 border-l-4 border-red-500 bg-red-950/10 flex flex-col justify-between items-center">
+                <span id="sl-label" class="text-[10px] text-red-400 uppercase tracking-wider">Stop Loss (ရှုံးရင်ဖြတ်ဈေး)</span>
                 <div id="target-sl" class="text-xl price-font text-red-400 my-2">$ --,---</div>
                 <span class="text-[9px] text-red-600 font-normal">* မဖြစ်မနေထည့်ရမည့် ဖြတ်ဈေး</span>
             </div>
 
             <!-- 4. Target Take Profit (TP) -->
-            <div class="stats-card p-4 border-l-4 border-blue-500 bg-blue-950/10 flex flex-col justify-between items-center">
-                <span class="text-[10px] text-blue-400 uppercase tracking-wider">Take Profit (အမြတ်ယူဈေး)</span>
+            <div id="tp-card" class="stats-card p-4 border-l-4 border-blue-500 bg-blue-950/10 flex flex-col justify-between items-center">
+                <span id="tp-label" class="text-[10px] text-blue-400 uppercase tracking-wider">Take Profit (အမြတ်ယူဈေး)</span>
                 <div id="target-tp" class="text-xl price-font text-blue-400 my-2">$ --,---</div>
-                <span class="text-[9px] text-blue-600 font-normal">* ပထမအဆင့် အမြတ်သတ်မှတ်ချက်</span>
+                <span class="text-[9px] text-blue-600 font-normal">* အမြတ်သတ်မှတ်ချက်</span>
             </div>
 
             <!-- 5. Real-time Live Price -->
@@ -169,7 +168,6 @@
         let currentSymbol = "BTCUSDT";
         let currentName = "Bitcoin";
 
-        // Advanced Fallback Database for US Government actions, SEC regulation & Whales on March 2026
         const backupNews = {
             "BTCUSDT": [
                 "ယူအက်စ်အစိုးရနှင့် FED မှ Crypto ပိုင်ဆိုင်မှုအပေါ် အခွန်စည်းကြပ်ရေးဥပဒေကြမ်းအသစ်ကို ဆွေးနွေးရန် ပြင်ဆင်နေ။",
@@ -209,12 +207,11 @@
             ]
         };
 
-        // Initialize Pro Chart Layout
         function initChart(symbol) {
             new TradingView.widget({
                 "width": "100%", "height": "100%",
                 "symbol": `BINANCE:${symbol}`,
-                "interval": "15", // 15m - Absolute best for futures day trading and scalping
+                "interval": "15", 
                 "timezone": "Asia/Yangon", 
                 "theme": "dark", 
                 "style": "1",
@@ -247,53 +244,88 @@
                 const lastPrice = parseFloat(data.lastPrice);
                 const pChange = parseFloat(data.priceChangePercent);
 
-                // Live price render with decimals
                 const decimalLimit = lastPrice < 1 ? 6 : 2;
                 document.getElementById('live-price').innerText = `$${lastPrice.toLocaleString(undefined, {maximumFractionDigits: decimalLimit})}`;
                 const pc = document.getElementById('price-percent');
                 pc.innerText = `${pChange > 0 ? '+' : ''}${pChange}%`;
                 pc.className = `text-xs font-bold mt-1 ${pChange > 0 ? 'text-green-500' : 'text-red-500'}`;
 
-                // DAY TRADING SCALPING CALCULATIONS
-                // Tighter Entry & Targets to get hit within the day
-                const entry = pChange < 0 ? lastPrice * 0.993 : lastPrice * 0.995; // Entry closer to price
-                const sl = entry * 0.99; // Tighter 1% SL for Futures
-                const tp = entry * 1.025; // 2.5% Target for Profit (Risk Reward Ratio 1:2.5)
+                // Determine trend direction (Bias)
+                const isLong = pChange >= 0;
+
+                let entry, sl, tp;
+                const dirEl = document.getElementById('best-direction');
+                
+                if (isLong) {
+                    // LONG (BULLISH) - Buy Low, Sell High
+                    dirEl.innerText = "LONG (BULLISH)";
+                    dirEl.className = "text-xl font-black mt-1 text-green-500 neon-green";
+                    
+                    entry = lastPrice * 0.995; // Entry below current price
+                    sl = entry * 0.99;        // Stop Loss below entry
+                    tp = entry * 1.025;       // Take Profit above entry
+
+                    // Update UI Colors & Labels for LONG
+                    document.getElementById('entry-label').innerText = "Safe Entry (BUY LONG)";
+                    document.getElementById('entry-label').className = "text-[10px] text-green-400 uppercase tracking-wider";
+                    document.getElementById('entry-card').className = "stats-card p-4 border-l-4 border-green-500 bg-green-950/10 flex flex-col justify-between items-center";
+                    document.getElementById('target-buy').className = "text-xl price-font text-green-400 my-2";
+
+                    document.getElementById('sl-label').innerText = "Stop Loss (ရှုံးရင်ဖြတ်ဈေး)";
+                    document.getElementById('sl-card').className = "stats-card p-4 border-l-4 border-red-500 bg-red-950/10 flex flex-col justify-between items-center";
+                    document.getElementById('target-sl').className = "text-xl price-font text-red-400 my-2";
+
+                    document.getElementById('tp-label').innerText = "Take Profit (အမြတ်ယူဈေး)";
+                    document.getElementById('tp-card').className = "stats-card p-4 border-l-4 border-blue-500 bg-blue-950/10 flex flex-col justify-between items-center";
+                    document.getElementById('target-tp').className = "text-xl price-font text-blue-400 my-2";
+                } else {
+                    // SHORT (BEARISH) - Sell High, Buy Low (Profit from Drop!)
+                    dirEl.innerText = "SHORT (BEARISH)";
+                    dirEl.className = "text-xl font-black mt-1 text-red-500 neon-red";
+                    
+                    entry = lastPrice * 1.005; // Entry slightly above current price (bounce)
+                    sl = entry * 1.01;        // Stop Loss is ABOVE entry (if price rises, we lose)
+                    tp = entry * 0.975;       // Take Profit is BELOW entry (if price drops, we profit)
+
+                    // Update UI Colors & Labels for SHORT (Invert color mapping to match short mindset)
+                    document.getElementById('entry-label').innerText = "Safe Entry (SELL SHORT)";
+                    document.getElementById('entry-label').className = "text-[10px] text-red-400 uppercase tracking-wider";
+                    document.getElementById('entry-card').className = "stats-card p-4 border-l-4 border-red-500 bg-red-950/10 flex flex-col justify-between items-center";
+                    document.getElementById('target-buy').className = "text-xl price-font text-red-400 my-2";
+
+                    document.getElementById('sl-label').innerText = "Stop Loss (ရှုံးရင်ဖြတ်ဈေး - အထက်)";
+                    document.getElementById('sl-card').className = "stats-card p-4 border-l-4 border-orange-500 bg-orange-950/10 flex flex-col justify-between items-center";
+                    document.getElementById('target-sl').className = "text-xl price-font text-orange-400 my-2";
+
+                    document.getElementById('tp-label').innerText = "Take Profit (အမြတ်ယူဈေး - အောက်)";
+                    document.getElementById('tp-card').className = "stats-card p-4 border-l-4 border-green-500 bg-green-950/10 flex flex-col justify-between items-center";
+                    document.getElementById('target-tp').className = "text-xl price-font text-green-400 my-2";
+                }
 
                 document.getElementById('target-buy').innerText = `$${entry.toLocaleString(undefined, {maximumFractionDigits: decimalLimit})}`;
                 document.getElementById('target-sl').innerText = `$${sl.toLocaleString(undefined, {maximumFractionDigits: decimalLimit})}`;
                 document.getElementById('target-tp').innerText = `$${tp.toLocaleString(undefined, {maximumFractionDigits: decimalLimit})}`;
 
-                // Calculate estimated ROE% for leverage
-                calculateROE(entry, sl, tp);
-
-                // Futures Direction Indicators
-                const dirEl = document.getElementById('best-direction');
-                if (pChange > 0.8) {
-                    dirEl.innerText = "LONG (BULLISH)";
-                    dirEl.className = "text-xl font-black mt-1 text-green-500 neon-green";
-                } else if (pChange < -0.8) {
-                    dirEl.innerText = "SHORT (BEARISH)";
-                    dirEl.className = "text-xl font-black mt-1 text-red-500 neon-red";
-                } else {
-                    dirEl.innerText = "SIDEWAYS (SCALPING)";
-                    dirEl.className = "text-xl font-black mt-1 text-yellow-500 neon-yellow";
-                }
-
-                fetchAIInsight(lastPrice, pChange, entry, sl, tp);
+                calculateROE(entry, sl, tp, isLong);
+                fetchAIInsight(lastPrice, pChange, entry, sl, tp, isLong);
                 fetchLatestNews();
             } catch (e) {
                 console.error("Dashboard Sync Failed", e);
             }
         }
 
-        // Live Calculator for ROE% based on User Inputs
-        function calculateROE(entry, sl, tp) {
+        function calculateROE(entry, sl, tp, isLong) {
             const leverage = parseFloat(document.getElementById('leverage-input').value) || 20;
             
-            // Percentage difference from entry
-            const profitPercent = ((tp - entry) / entry) * 100;
-            const lossPercent = ((entry - sl) / entry) * 100;
+            let profitPercent, lossPercent;
+            
+            if (isLong) {
+                profitPercent = ((tp - entry) / entry) * 100;
+                lossPercent = ((entry - sl) / entry) * 100;
+            } else {
+                profitPercent = ((entry - tp) / entry) * 100; // For short, TP is below Entry
+                lossPercent = ((sl - entry) / entry) * 100;   // For short, SL is above Entry
+            }
 
             const estProfit = profitPercent * leverage;
             const estLoss = lossPercent * leverage;
@@ -302,9 +334,10 @@
             document.getElementById('est-loss-roe').innerText = `-${estLoss.toFixed(2)}%`;
         }
 
-        async function fetchAIInsight(price, change, entry, sl, tp) {
+        async function fetchAIInsight(price, change, entry, sl, tp, isLong) {
             try {
-                const prompt = `Provide 3 sharp, ultra-fast day trading tips for 'Han Thar' trading ${currentName}. Current price is $${price} (${change}% change). Target Entry: $${entry}, Stop Loss: $${sl}, Take Profit: $${tp}. Warn about leverage risks. Speak in natural Burmese. Today is May 26, 2026.`;
+                const directionText = isLong ? "LONG (BUY)" : "SHORT (SELL)";
+                const prompt = `Provide 3 sharp, ultra-fast day trading tips for 'Han Thar' trading ${currentName}. Current price is $${price} (${change}% change). Suggested direction: ${directionText}. Target Entry: $${entry}, Stop Loss: $${sl}, Take Profit: $${tp}. Warn about leverage risks. Speak in natural Burmese. Today is May 26, 2026.`;
                 const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -359,7 +392,6 @@
             `).join('');
         }
 
-        // Live calculator event listeners
         document.getElementById('leverage-input').addEventListener('input', () => {
             updateDashboard();
         });
@@ -367,7 +399,7 @@
         window.onload = () => {
             initChart('BTCUSDT');
             updateDashboard();
-            setInterval(updateDashboard, 60000); // Sync prices and update values every 1 minute
+            setInterval(updateDashboard, 60000); 
         };
     </script>
 </body>
