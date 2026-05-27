@@ -1,0 +1,5 @@
+body { margin: 0; background-color: #131722; color: #d1d4dc; font-family: sans-serif; }
+#chart-container { width: 100%; height: 80vh; }
+#controls { padding: 20px; display: flex; gap: 15px; background: #1e222d; }
+select, button { padding: 10px; cursor: pointer; }
+button { background: #2962ff; color: white; border: none; }
