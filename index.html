@@ -1,366 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Phoe Ree Futures Dashboard Ultimate</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://s3.tradingview.com/tv.js"></script>
-
-<style>
-body {
-    background: #0b0e11;
-    color: white;
-    font-family: Arial, sans-serif;
-}
-
-.stats-card {
-    background: #1e2329;
-    border: 1px solid #2b3139;
-    border-radius: 14px;
-}
-
-.tab-btn {
-    padding: 8px 14px;
-    border-radius: 10px;
-    background: #2b3139;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.tab-active {
-    background: #f0b90b;
-    color: black;
-}
-
-.price-font {
-    font-family: monospace;
-}
-
-.news-item {
-    background: rgba(255,255,255,0.03);
-    padding: 10px;
-    border-radius: 10px;
-    border-left: 3px solid #f0b90b;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoe Ree Futures & Grid Bot Pro V18</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap');
+        body { background-color: #0b0e11; color: #eaecef; font-family: 'Padauk', sans-serif; overflow-x: hidden; }
+        .stats-card { background: #1e2026; border: 1px solid #303339; border-radius: 12px; }
+        .tab-btn { padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; border: 1px solid #303339; font-size: 11px; background: #2b2f36; min-width: 65px; text-align: center; transition: 0.2s; }
+        .tab-active { background: #f3ba2f; color: #000; border-color: #f3ba2f; box-shadow: 0 4px 12px rgba(243, 186, 47, 0.3); }
+        .price-font { font-family: 'monospace'; font-weight: 800; }
+        .news-item { border-left: 3px solid #f3ba2f; background: #16181d; padding: 12px; margin-bottom: 12px; border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; }
+        
+        .neon-green { text-shadow: 0 0 10px rgba(34, 197, 94, 0.5); color: #22c55e; }
+        .neon-red { text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); color: #ef4444; }
+        .neon-yellow { text-shadow: 0 0 10px rgba(243, 186, 47, 0.5); color: #f3ba2f; }
+        
+        #news-list::-webkit-scrollbar { width: 4px; }
+        #news-list::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 10px; }
+        .shimmer { background: linear-gradient(90deg, #1e2026 25%, #2a2d35 50%, #1e2026 75%); background-size: 200% 100%; animation: loading-shimmer 1.5s infinite; }
+        @keyframes loading-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    </style>
 </head>
-
-<body class="p-3">
-
-<div class="max-w-7xl mx-auto space-y-4">
-
-<div class="stats-card p-4 flex flex-col lg:flex-row justify-between items-center gap-4">
-
-<div>
-<h1 class="text-3xl font-black text-yellow-400">
-Phoe Ree Futures Dashboard Ultimate
-</h1>
-<p class="text-xs text-gray-400 mt-1">
-Realtime AI Futures & Grid Trading System
-</p>
-</div>
-
-<div class="flex flex-wrap gap-2">
-<div class="tab-btn tab-active" onclick="changeCoin('BTCUSDT', this)">BTC</div>
-<div class="tab-btn" onclick="changeCoin('ETHUSDT', this)">ETH</div>
-<div class="tab-btn" onclick="changeCoin('SOLUSDT', this)">SOL</div>
-<div class="tab-btn" onclick="changeCoin('BNBUSDT', this)">BNB</div>
-<div class="tab-btn" onclick="changeCoin('DOGEUSDT', this)">DOGE</div>
-</div>
-
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-5 gap-3">
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">LIVE PRICE</div>
-<div id="live-price" class="text-3xl font-black mt-2 price-font">
---
-</div>
-</div>
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">TREND</div>
-<div id="trend" class="text-2xl font-black mt-2 text-yellow-400">
-ANALYZING
-</div>
-</div>
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">ENTRY</div>
-<div id="entry" class="text-2xl font-black mt-2 text-green-400">
---
-</div>
-</div>
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">STOP LOSS</div>
-<div id="sl" class="text-2xl font-black mt-2 text-red-400">
---
-</div>
-</div>
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">TAKE PROFIT</div>
-<div id="tp" class="text-2xl font-black mt-2 text-blue-400">
---
-</div>
-</div>
-
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">SIGNAL CONFIDENCE</div>
-<div id="confidence" class="text-4xl font-black text-purple-400 mt-2">
-0%
-</div>
-</div>
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">GRID TYPE</div>
-<div id="grid-type" class="text-3xl font-black text-yellow-400 mt-2">
-LONG GRID
-</div>
-</div>
-
-<div class="stats-card p-4 text-center">
-<div class="text-xs text-gray-400">VOLATILITY</div>
-<div id="volatility" class="text-3xl font-black text-red-400 mt-2">
-LOW
-</div>
-</div>
-
-</div>
-
-<div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-
-<div class="lg:col-span-3 stats-card overflow-hidden h-[600px]">
-<div id="tv_chart_container" class="w-full h-full"></div>
-</div>
-
-<div class="stats-card p-4 space-y-4 overflow-y-auto max-h-[600px]">
-
-<div>
-<div class="text-xs text-gray-400 mb-2">
-AI MARKET INSIGHT
-</div>
-<div id="ai-insight" class="text-sm text-gray-300 leading-relaxed">
-Loading...
-</div>
-</div>
-
-<div>
-<div class="text-xs text-gray-400 mb-2">
-LATEST NEWS
-</div>
-<div id="news" class="space-y-2">
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-let currentSymbol = 'BTCUSDT';
-let socket;
-
-function initChart(symbol) {
-
-    document.getElementById('tv_chart_container').innerHTML = '';
-
-    new TradingView.widget({
-        symbol: `BINANCE:${symbol}`,
-        interval: '15',
-        timezone: 'Asia/Yangon',
-        theme: 'dark',
-        style: '1',
-        container_id: 'tv_chart_container',
-        width: '100%',
-        height: '100%',
-        studies: [
-            'RSI@tv-basicstudies',
-            'MACD@tv-basicstudies'
-        ]
-    });
-}
-
-function changeCoin(symbol, btn) {
-
-    currentSymbol = symbol;
-
-    document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('tab-active');
-    });
-
-    btn.classList.add('tab-active');
-
-    connectSocket(symbol);
-
-    initChart(symbol);
-}
-
-function connectSocket(symbol) {
-
-    if(socket) {
-        socket.close();
-    }
-
-    socket = new WebSocket(
-        `wss://fstream.binance.com/ws/${symbol.toLowerCase()}@ticker`
-    );
-
-    socket.onmessage = (event) => {
-
-        const data = JSON.parse(event.data);
-
-        const price = parseFloat(data.c);
-        const change = parseFloat(data.P);
-
-        updateDashboard(price, change);
-    };
-
-    socket.onclose = () => {
-        setTimeout(() => {
-            connectSocket(symbol);
-        }, 3000);
-    };
-}
-
-function updateDashboard(price, change) {
-
-    document.getElementById('live-price').textContent =
-        `$${price.toLocaleString(undefined,{maximumFractionDigits:2})}`;
-
-    let trend = 'SIDEWAYS';
-    let confidence = 50;
-
-    if(change > 1) {
-        trend = 'LONG';
-        confidence = 85;
-    }
-
-    if(change < -1) {
-        trend = 'SHORT';
-        confidence = 82;
-    }
-
-    const trendEl = document.getElementById('trend');
-
-    trendEl.textContent = trend;
-
-    if(trend === 'LONG') {
-        trendEl.className = 'text-2xl font-black mt-2 text-green-400';
-    }
-
-    else if(trend === 'SHORT') {
-        trendEl.className = 'text-2xl font-black mt-2 text-red-400';
-    }
-
-    else {
-        trendEl.className = 'text-2xl font-black mt-2 text-yellow-400';
-    }
-
-    const entry = trend === 'LONG'
-        ? price * 0.995
-        : price * 1.005;
-
-    const sl = trend === 'LONG'
-        ? entry * 0.99
-        : entry * 1.01;
-
-    const tp = trend === 'LONG'
-        ? entry * 1.025
-        : entry * 0.975;
-
-    document.getElementById('entry').textContent =
-        `$${entry.toFixed(2)}`;
-
-    document.getElementById('sl').textContent =
-        `$${sl.toFixed(2)}`;
-
-    document.getElementById('tp').textContent =
-        `$${tp.toFixed(2)}`;
-
-    document.getElementById('confidence').textContent =
-        `${confidence}%`;
-
-    document.getElementById('grid-type').textContent =
-        trend === 'LONG' ? 'LONG GRID' : 'SHORT GRID';
-
-    const volatilityEl = document.getElementById('volatility');
-
-    if(Math.abs(change) > 4) {
-        volatilityEl.textContent = 'HIGH';
-        volatilityEl.className = 'text-3xl font-black text-red-500 mt-2';
-    }
-
-    else {
-        volatilityEl.textContent = 'NORMAL';
-        volatilityEl.className = 'text-3xl font-black text-green-400 mt-2';
-    }
-
-}
-
-function loadAIInsight() {
-
-    const insights = [
-        'Market volatility is active. Use lower leverage.',
-        'Wait for confirmation candles before entering trades.',
-        'BTC futures volume currently increasing.',
-        'Protect capital using strict stop loss.',
-        'Avoid emotional trading during volatility.'
-    ];
-
-    const randomInsight = insights[
-        Math.floor(Math.random() * insights.length)
-    ];
-
-    document.getElementById('ai-insight').textContent =
-        randomInsight;
-}
-
-function loadNews() {
-
-    const news = [
-        'Bitcoin ETF inflows continue rising strongly.',
-        'FED policy creating volatility in crypto market.',
-        'Whale accumulation detected on Binance futures.',
-        'Ethereum network activity increasing rapidly.',
-        'Open interest climbing across futures market.'
-    ];
-
-    const newsEl = document.getElementById('news');
-
-    newsEl.innerHTML = news.map(item => `
-        <div class="news-item">
-            • ${item}
+<body class="p-2 md:p-4 bg-[#0b0e11]">
+    <div class="max-w-7xl mx-auto">
+        <!-- Main Top Bar -->
+        <div class="flex flex-col lg:flex-row justify-between items-center bg-[#1e2026] p-4 rounded-xl border border-gray-800 mb-4 gap-4">
+            <div class="text-center lg:text-left">
+                <h1 class="text-2xl font-black bg-gradient-to-r from-[#f3ba2f] to-[#ffd700] bg-clip-text text-transparent font-bold">ကိုဟန်သာ (Phoe Ree) FUTURES & GRID BOT</h1>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Real-time Futures API, Auto-Grid Recommendation & US Gov Policy Tracker</p>
+            </div>
+            
+            <!-- Coin Selector -->
+            <div id="coin-tabs" class="flex flex-wrap gap-1.5 justify-center">
+                <div onclick="changeCoin('BTCUSDT', 'Bitcoin')" class="tab-btn tab-active" id="btn-BTCUSDT">BTC</div>
+                <div onclick="changeCoin('ETHUSDT', 'Ethereum')" class="tab-btn" id="btn-ETHUSDT">ETH</div>
+                <div onclick="changeCoin('SOLUSDT', 'Solana')" class="tab-btn" id="btn-SOLUSDT">SOL</div>
+                <div onclick="changeCoin('BNBUSDT', 'Binance')" class="tab-btn" id="btn-BNBUSDT">BNB</div>
+                <div onclick="changeCoin('RENDERUSDT', 'Render')" class="tab-btn" id="btn-RENDERUSDT">RENDER</div>
+                <div onclick="changeCoin('TIAUSDT', 'Celestia')" class="tab-btn" id="btn-TIAUSDT">TIA</div>
+                <div onclick="changeCoin('PAXGUSDT', 'Gold')" class="tab-btn" id="btn-PAXGUSDT">PAXG</div>
+                <div onclick="changeCoin('1000PEPEUSDT', '1000PEPE')" class="tab-btn" id="btn-1000PEPEUSDT">PEPE</div>
+            </div>
         </div>
-    `).join('');
-}
 
-window.onload = () => {
+        <!-- DAY TRADING FUTURES STRATEGIC CONTROLS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4 font-bold text-center">
+            <!-- 1. Futures Trend Direction (Long/Short) -->
+            <div class="stats-card p-4 border-l-4 border-yellow-500 flex flex-col justify-between items-center">
+                <span class="text-[10px] text-gray-400 uppercase tracking-wider">Trading Direction (လားရာ)</span>
+                <div id="best-direction" class="text-xl font-black uppercase my-2 tracking-wide text-yellow-500">ANALYZING...</div>
+                <span class="text-[9px] text-gray-500 font-normal italic">* Dynamic Price Range Formula</span>
+            </div>
 
-    initChart(currentSymbol);
+            <!-- 2. Safe Entry (Dynamic Label based on Trend) -->
+            <div id="entry-card" class="stats-card p-4 border-l-4 border-green-500 bg-green-950/10 flex flex-col justify-between items-center">
+                <span id="entry-label" class="text-[10px] text-green-400 uppercase tracking-wider">Safe Entry (ဝင်ရမည့်ဈေး)</span>
+                <div id="target-buy" class="text-xl price-font text-green-400 my-2">$` --,---</div>
+                <span class="text-[9px] text-green-600 font-normal">* Limit Order နေရာ</span>
+            </div>
 
-    connectSocket(currentSymbol);
-
-    loadAIInsight();
-
-    loadNews();
-
-    setInterval(loadAIInsight, 15000);
-};
-
-</script>
-
-</body>
-</html>
+            <!-- 3. Strict Stop Loss (SL) -->
+            <di
