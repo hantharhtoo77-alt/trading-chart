@@ -1,0 +1,7 @@
+{
+  "name": "Hanthar Trading Bot",
+  "short_name": "HantharBot",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#131722"
+}
