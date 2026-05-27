@@ -3,65 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phoe Ree Futures & Grid Bot Pro V18</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap');
-        body { background-color: #0b0e11; color: #eaecef; font-family: 'Padauk', sans-serif; overflow-x: hidden; }
-        .stats-card { background: #1e2026; border: 1px solid #303339; border-radius: 12px; }
-        .tab-btn { padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; border: 1px solid #303339; font-size: 11px; background: #2b2f36; min-width: 65px; text-align: center; transition: 0.2s; }
-        .tab-active { background: #f3ba2f; color: #000; border-color: #f3ba2f; box-shadow: 0 4px 12px rgba(243, 186, 47, 0.3); }
-        .price-font { font-family: 'monospace'; font-weight: 800; }
-        .news-item { border-left: 3px solid #f3ba2f; background: #16181d; padding: 12px; margin-bottom: 12px; border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.6; }
-        
-        .neon-green { text-shadow: 0 0 10px rgba(34, 197, 94, 0.5); color: #22c55e; }
-        .neon-red { text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); color: #ef4444; }
-        .neon-yellow { text-shadow: 0 0 10px rgba(243, 186, 47, 0.5); color: #f3ba2f; }
-        
-        #news-list::-webkit-scrollbar { width: 4px; }
-        #news-list::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 10px; }
-        .shimmer { background: linear-gradient(90deg, #1e2026 25%, #2a2d35 50%, #1e2026 75%); background-size: 200% 100%; animation: loading-shimmer 1.5s infinite; }
-        @keyframes loading-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    </style>
+    <title>Hanthar Crypto Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
-<body class="p-2 md:p-4 bg-[#0b0e11]">
-    <div class="max-w-7xl mx-auto">
-        <!-- Main Top Bar -->
-        <div class="flex flex-col lg:flex-row justify-between items-center bg-[#1e2026] p-4 rounded-xl border border-gray-800 mb-4 gap-4">
-            <div class="text-center lg:text-left">
-                <h1 class="text-2xl font-black bg-gradient-to-r from-[#f3ba2f] to-[#ffd700] bg-clip-text text-transparent font-bold">ကိုဟန်သာ (Phoe Ree) FUTURES & GRID BOT</h1>
-                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Real-time Futures API, Auto-Grid Recommendation & US Gov Policy Tracker</p>
-            </div>
-            
-            <!-- Coin Selector -->
-            <div id="coin-tabs" class="flex flex-wrap gap-1.5 justify-center">
-                <div onclick="changeCoin('BTCUSDT', 'Bitcoin')" class="tab-btn tab-active" id="btn-BTCUSDT">BTC</div>
-                <div onclick="changeCoin('ETHUSDT', 'Ethereum')" class="tab-btn" id="btn-ETHUSDT">ETH</div>
-                <div onclick="changeCoin('SOLUSDT', 'Solana')" class="tab-btn" id="btn-SOLUSDT">SOL</div>
-                <div onclick="changeCoin('BNBUSDT', 'Binance')" class="tab-btn" id="btn-BNBUSDT">BNB</div>
-                <div onclick="changeCoin('RENDERUSDT', 'Render')" class="tab-btn" id="btn-RENDERUSDT">RENDER</div>
-                <div onclick="changeCoin('TIAUSDT', 'Celestia')" class="tab-btn" id="btn-TIAUSDT">TIA</div>
-                <div onclick="changeCoin('PAXGUSDT', 'Gold')" class="tab-btn" id="btn-PAXGUSDT">PAXG</div>
-                <div onclick="changeCoin('1000PEPEUSDT', '1000PEPE')" class="tab-btn" id="btn-1000PEPEUSDT">PEPE</div>
-            </div>
-        </div>
-
-        <!-- DAY TRADING FUTURES STRATEGIC CONTROLS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4 font-bold text-center">
-            <!-- 1. Futures Trend Direction (Long/Short) -->
-            <div class="stats-card p-4 border-l-4 border-yellow-500 flex flex-col justify-between items-center">
-                <span class="text-[10px] text-gray-400 uppercase tracking-wider">Trading Direction (လားရာ)</span>
-                <div id="best-direction" class="text-xl font-black uppercase my-2 tracking-wide text-yellow-500">ANALYZING...</div>
-                <span class="text-[9px] text-gray-500 font-normal italic">* Dynamic Price Range Formula</span>
-            </div>
-
-            <!-- 2. Safe Entry (Dynamic Label based on Trend) -->
-            <div id="entry-card" class="stats-card p-4 border-l-4 border-green-500 bg-green-950/10 flex flex-col justify-between items-center">
-                <span id="entry-label" class="text-[10px] text-green-400 uppercase tracking-wider">Safe Entry (ဝင်ရမည့်ဈေး)</span>
-                <div id="target-buy" class="text-xl price-font text-green-400 my-2">$` --,---</div>
-                <span class="text-[9px] text-green-600 font-normal">* Limit Order နေရာ</span>
-            </div>
-
-            <!-- 3. Strict Stop Loss (SL) -->
-            <di
+<body>
+    <div id="chart-container"></div>
+    <div id="controls">
+        <select id="pairSelect">
+            <option value="BTCUSDC">BTC/USDC</option>
+            <option value="ETHUSDT">ETH/USDT</option>
+            <option value="SOLUSDT">SOL/USDT</option>
+        </select>
+        <button id="startGrid">Start Grid Bot</button>
+    </div>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
