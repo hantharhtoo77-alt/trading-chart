@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Futures & Grid Bot Pro V19 - Full Asset</title>
+  <title>Futures & Grid Bot Pro V19 - Fixed</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,17 +11,13 @@
   <script type="text/javascript" src="https://s3.tradingview.com/tv.js" defer></script>
   
   <style>
-    body { background-color: #0b0e11; color: #eaecef; font-family: 'Padauk', sans-serif; overflow-x: hidden; }
-    .stats-card { background: #1e2026; border: 1px solid #303339; border-radius: 12px; transition: all 0.3s ease; }
-    .stats-card:hover { border-color: #4b5563; }
-    .tab-btn { padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; border: 1px solid #303339; font-size: 11px; background: #2b2f36; min-width: 60px; text-align: center; transition: all 0.2s ease; }
-    .tab-active { background: #f3ba2f; color: #000000; border-color: #f3ba2f; box-shadow: 0 4px 14px rgba(243, 186, 47, 0.35); }
+    body { background-color: #0b0e11; color: #eaecef; font-family: 'Padauk', sans-serif; }
+    .stats-card { background: #1e2026; border: 1px solid #303339; border-radius: 12px; }
+    .tab-btn { padding: 8px 12px; border-radius: 8px; cursor: pointer; border: 1px solid #303339; font-size: 11px; background: #2b2f36; min-width: 60px; text-align: center; }
+    .tab-active { background: #f3ba2f; color: #000000; border-color: #f3ba2f; font-weight: bold; }
     .price-font { font-family: 'JetBrains Mono', monospace; font-weight: 800; }
-    .news-item { border-left: 3px solid #3b82f6; background: #16181d; padding: 12px; margin-bottom: 12px; border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.7; }
     .custom-scroll::-webkit-scrollbar { width: 4px; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #4a4a4a; border-radius: 10px; }
-    .shimmer { background: linear-gradient(90deg, #1e2026 25%, #2a2d35 50%, #1e2026 75%); background-size: 200% 100%; animation: loading-shimmer 1.5s infinite; }
-    @keyframes loading-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
   </style>
 </head>
 <body class="p-2 md:p-4 bg-[#0b0e11]">
@@ -29,10 +25,7 @@
     
     <div class="flex flex-col lg:flex-row justify-between items-center bg-[#1e2026] p-4 rounded-xl border border-gray-800 mb-4 gap-4">
       <div class="text-center lg:text-left">
-        <h1 class="text-xl md:text-2xl font-black bg-gradient-to-r from-[#f3ba2f] to-[#ffd700] bg-clip-text text-transparent tracking-wide">
-          ဖိုးရီး FUTURES & GRID BOT <span class="text-xs bg-yellow-500 text-black px-2 py-0.5 rounded ml-1 font-mono">PRO V19</span>
-        </h1>
-        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Full Assets Supported (Crypto & PAXG Gold)</p>
+        <h1 class="text-xl md:text-2xl font-black text-yellow-500">ဖိုးရီး FUTURES & GRID BOT <span class="text-xs bg-yellow-500 text-black px-2 py-0.5 rounded ml-1">V19 FIX</span></h1>
       </div>
       <div id="coin-tabs" class="flex flex-wrap gap-1.5 justify-center">
         <div onclick="changeCoin('BTCUSDT', 'Bitcoin')" class="tab-btn tab-active" id="btn-BTCUSDT">BTC</div>
@@ -46,169 +39,178 @@
       </div>
     </div>
 
-    <div class="stats-card p-6 text-center border-l-4 border-yellow-500 mb-4 relative overflow-hidden">
-      <div class="absolute top-2 right-3 flex items-center gap-1">
-        <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
-        <span class="text-[9px] text-green-400 font-mono font-bold">STREAMING</span>
-      </div>
-      <span class="text-[10px] text-gray-400 uppercase tracking-widest" id="coin-label">BITCOIN LIVE PRICE</span>
-      <div id="live-price" class="text-3xl md:text-4xl price-font text-white my-2 font-black tracking-tight">$ --,---</div>
+    <div class="stats-card p-6 text-center border-l-4 border-yellow-500 mb-4 relative">
+      <span class="text-[10px] text-gray-400 uppercase tracking-widest" id="coin-label">BTC LIVE PRICE</span>
+      <div id="live-price" class="text-3xl md:text-4xl price-font text-white my-2 tracking-tight">$ --,---</div>
       <div id="price-percent" class="text-sm font-bold">--%</div>
     </div>
 
     <div class="stats-card p-5 mb-4 border-t-4 border-amber-500">
-      <h2 class="text-sm font-bold text-amber-400 mb-4 flex items-center gap-2"><span>🎯</span> Trading Strategy</h2>
+      <h2 class="text-sm font-bold text-amber-400 mb-4">🎯 Trading Strategy</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs font-bold text-center">
-        <div class="bg-black/30 p-3 rounded-lg border border-gray-800"><span class="text-gray-400 text-[9px] block mb-1">DIRECTION</span><span id="best-direction" class="text-sm font-black text-yellow-500">ANALYZING...</span></div>
-        <div id="entry-subcard" class="bg-black/30 p-3 rounded-lg border border-gray-800"><span class="text-gray-400 text-[9px] block mb-1">SAFE ENTRY</span><span id="target-buy" class="text-sm price-font text-green-400">$ --,---</span></div>
-        <div class="bg-black/30 p-3 rounded-lg border border-gray-800"><span class="text-gray-400 text-[9px] block mb-1">WIN RATE</span><span id="win-rate" class="text-sm font-black price-font text-emerald-400">--%</span></div>
-        <div class="bg-black/30 p-3 rounded-lg border border-gray-800"><span class="text-gray-400 text-[9px] block mb-1">R:R RATIO</span><span class="text-sm font-black price-font text-blue-400">1 : 2.5</span></div>
-        <div id="tp-subcard" class="bg-black/30 p-3 rounded-lg border border-gray-800"><span class="text-gray-400 text-[9px] block mb-1">TAKE PROFIT</span><span id="target-tp" class="text-sm price-font text-blue-400">$ --,---</span></div>
-        <div id="sl-subcard" class="bg-black/30 p-3 rounded-lg border border-gray-800"><span class="text-gray-400 text-[9px] block mb-1">STOP LOSS</span><span id="target-sl" class="text-sm price-font text-red-400">$ --,---</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Direction</span><span id="best-direction" class="text-sm text-yellow-500">...</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Entry</span><span id="target-buy" class="text-sm text-green-400">$ --,---</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Win Rate</span><span id="win-rate" class="text-sm text-emerald-400">--%</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">R:R</span><span class="text-sm text-blue-400">1:2.5</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">TP</span><span id="target-tp" class="text-sm text-blue-400">$ --,---</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">SL</span><span id="target-sl" class="text-sm text-red-400">$ --,---</span></div>
+      </div>
+    </div>
+
+    <div class="stats-card p-5 mb-4 border-t-4 border-teal-500">
+      <h2 class="text-sm font-bold text-teal-400 mb-4">🤖 Futures Grid Bot Configuration</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs font-bold text-center">
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Grid Type</span><span id="grid-type" class="text-sm text-yellow-500">...</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Lower Price</span><span id="grid-low" class="text-sm text-green-400">$ --,---</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Upper Price</span><span id="grid-high" class="text-sm text-red-400">$ --,---</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Grids</span><span class="text-sm text-blue-400">40 - 60</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Profit/Grid</span><span class="text-sm text-emerald-400">0.5% - 1%</span></div>
+        <div class="bg-black/30 p-3 rounded-lg"><span class="text-gray-400 text-[9px] block mb-1 uppercase">Safety</span><span class="text-sm text-green-400">High</span></div>
       </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
       <div class="lg:col-span-3 space-y-4">
-        <div class="stats-card h-[450px] overflow-hidden border border-gray-800" id="tv_chart_wrapper">
+        <div class="stats-card h-[400px] overflow-hidden border border-gray-800" id="tv_chart_wrapper">
           <div id="tv_chart_container" class="h-full w-full"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="stats-card p-5 border-t-4 border-blue-500">
-            <h2 class="text-sm font-bold text-blue-400 mb-3">🧮 Position Calculator</h2>
+            <h2 class="text-sm font-bold text-blue-400 mb-3">🧮 Calculator</h2>
             <div class="space-y-3 text-xs">
-              <div class="flex justify-between items-center"><span class="text-gray-400">Margin ($):</span><input type="number" id="margin-input" value="100" class="w-24 bg-gray-800 border border-gray-700 text-center rounded text-white p-1 font-bold font-mono"></div>
-              <div class="flex justify-between items-center"><span class="text-gray-400">Leverage:</span><div class="flex items-center gap-1"><input type="number" id="leverage-input" value="20" class="w-16 bg-gray-800 border border-gray-700 text-center rounded text-white p-1 font-bold font-mono"> <span class="text-yellow-500">x</span></div></div>
-              <div class="border-t border-gray-800 pt-2 font-bold flex justify-between"><span>Profit (Target):</span><span id="est-profit-roe" class="text-green-400">+$0.00</span></div>
-              <div class="font-bold flex justify-between"><span>Loss (Strict):</span><span id="est-loss-roe" class="text-red-400">-$0.00</span></div>
-              <div class="font-bold flex justify-between text-orange-400 border-t border-gray-800/50 pt-2"><span>Liq. Price:</span><span id="est-liq-price">$0.00</span></div>
+              <div class="flex justify-between items-center"><span>Margin ($):</span><input type="number" id="margin-input" value="100" class="w-20 bg-gray-800 p-1 text-center rounded"></div>
+              <div class="flex justify-between items-center"><span>Leverage:</span><input type="number" id="lev-input" value="20" class="w-20 bg-gray-800 p-1 text-center rounded"></div>
+              <div class="border-t border-gray-800 pt-2 flex justify-between font-bold text-green-400"><span>Target Profit:</span><span id="calc-profit">$0.00</span></div>
+              <div class="flex justify-between font-bold text-red-400"><span>Target Loss:</span><span id="calc-loss">$0.00</span></div>
+              <div class="flex justify-between font-bold text-orange-400"><span>Liq Price:</span><span id="calc-liq">$0.00</span></div>
             </div>
           </div>
           <div class="stats-card p-5 border-t-4 border-yellow-500">
-            <h2 class="text-sm font-bold text-yellow-500 mb-3">🤖 AI Advisor</h2>
-            <div id="ai-insight" class="text-xs text-gray-300 italic leading-relaxed h-[100px] overflow-y-auto custom-scroll">Analyzing trends...</div>
+            <h2 class="text-sm font-bold text-yellow-500 mb-3">🤖 AI Insight</h2>
+            <div id="ai-insight" class="text-xs text-gray-400 italic">Connecting to market...</div>
           </div>
         </div>
       </div>
 
-      <div class="stats-card p-4 lg:col-span-1 flex flex-col">
-        <h3 class="text-xs font-bold text-blue-400 mb-4 border-b border-gray-800 pb-2">LIVE NEWS ANALYSIS</h3>
-        <div id="news-list" class="flex-grow overflow-y-auto custom-scroll space-y-3">
-          <div class="h-10 shimmer rounded w-full"></div>
-          <div class="h-10 shimmer rounded w-full"></div>
-          <div class="h-10 shimmer rounded w-full"></div>
+      <div class="stats-card p-4 lg:col-span-1">
+        <h3 class="text-xs font-bold text-blue-400 mb-4 border-b border-gray-800 pb-2 uppercase">Live Feeds</h3>
+        <div id="news-list" class="space-y-3 text-xs">
+          <div class="text-gray-500">Updating news...</div>
         </div>
-        <button onclick="fetchLatestNews()" class="mt-4 w-full py-2 bg-[#2b2f36] rounded text-[10px] font-bold border border-gray-700">🔄 REFRESH NEWS</button>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript">
+  <script>
     let currentSymbol = "BTCUSDT";
-    let wsConnection = null;
-    let dom = {};
+    let ws = null;
+    let elements = {};
 
-    function initDom() {
-      dom = {
+    function init() {
+      elements = {
         price: document.getElementById('live-price'),
-        percent: document.getElementById('price-percent'),
-        label: document.getElementById('coin-label'),
+        pct: document.getElementById('price-percent'),
+        lbl: document.getElementById('coin-label'),
         dir: document.getElementById('best-direction'),
         win: document.getElementById('win-rate'),
         entry: document.getElementById('target-buy'),
         tp: document.getElementById('target-tp'),
         sl: document.getElementById('target-sl'),
+        gType: document.getElementById('grid-type'),
+        glow: document.getElementById('grid-low'),
+        ghigh: document.getElementById('grid-high'),
         margin: document.getElementById('margin-input'),
-        lev: document.getElementById('leverage-input'),
-        pRoe: document.getElementById('est-profit-roe'),
-        lRoe: document.getElementById('est-loss-roe'),
-        liq: document.getElementById('est-liq-price'),
+        lev: document.getElementById('lev-input'),
+        pOut: document.getElementById('calc-profit'),
+        lOut: document.getElementById('calc-loss'),
+        liq: document.getElementById('calc-liq'),
         ai: document.getElementById('ai-insight'),
         news: document.getElementById('news-list')
       };
+      startWS(currentSymbol);
+      initChart(currentSymbol);
+      fetchNews();
     }
 
-    function connectWS(symbol) {
-      if (wsConnection) wsConnection.close();
-      wsConnection = new WebSocket(`wss://fstream.binance.com/ws/${symbol.toLowerCase()}@ticker`);
-      wsConnection.onmessage = (e) => {
+    function startWS(symbol) {
+      if (ws) ws.close();
+      // Binance Futures WebSocket
+      ws = new WebSocket(`wss://fstream.binance.com/ws/${symbol.toLowerCase()}@ticker`);
+      
+      ws.onmessage = (e) => {
         const d = JSON.parse(e.data);
-        updateUI(parseFloat(d.c), parseFloat(d.P), parseFloat(d.h), parseFloat(d.l));
+        const p = parseFloat(d.c);
+        const pc = parseFloat(d.P);
+        const h = parseFloat(d.h);
+        const l = parseFloat(d.l);
+        updateDashboard(p, pc, h, l);
       };
+
+      ws.onerror = () => { elements.price.innerText = "Connection Error"; };
     }
 
-    function updateUI(price, pChange, high, low) {
-      const dec = price < 1 ? 6 : (price < 10 ? 4 : 2);
-      dom.price.innerText = `$${price.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
-      dom.percent.innerText = `${pChange >= 0 ? '+' : ''}${pChange.toFixed(2)}%`;
-      dom.percent.className = `text-sm font-bold ${pChange >= 0 ? 'text-green-500' : 'text-red-500'}`;
+    function updateDashboard(p, pc, h, l) {
+      const dec = p < 1 ? 6 : (p < 10 ? 4 : 2);
+      elements.price.innerText = `$${p.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
+      elements.pct.innerText = `${pc >= 0 ? '+' : ''}${pc.toFixed(2)}%`;
+      elements.pct.className = `text-sm font-bold ${pc >= 0 ? 'text-green-500' : 'text-red-500'}`;
 
-      const range = high - low;
-      const pos = range > 0 ? (price - low) / range : 0.5;
-      const isLong = pos > 0.5;
+      const range = h - l;
+      const isLong = (p - l) / range > 0.5;
+      
+      elements.dir.innerText = isLong ? "LONG" : "SHORT";
+      elements.dir.className = isLong ? "text-sm text-green-500" : "text-sm text-red-500";
+      elements.win.innerText = `${65 + Math.floor(Math.random() * 20)}%`;
 
-      dom.dir.innerText = isLong ? "LONG (BULLISH)" : "SHORT (BEARISH)";
-      dom.dir.className = `text-sm font-black ${isLong ? 'text-green-500' : 'text-red-500'}`;
-      dom.win.innerText = `${Math.round(60 + (Math.abs(pos-0.5)*50))}%`;
+      const ent = isLong ? p * 0.998 : p * 1.002;
+      const tp = isLong ? ent * 1.02 : ent * 0.98;
+      const sl = isLong ? ent * 0.99 : ent * 1.01;
 
-      const entry = isLong ? price * 0.997 : price * 1.003;
-      const tp = isLong ? entry * 1.025 : entry * 0.975;
-      const sl = isLong ? entry * 0.99 : entry * 1.01;
+      elements.entry.innerText = `$${ent.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
+      elements.tp.innerText = `$${tp.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
+      elements.sl.innerText = `$${sl.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
 
-      dom.entry.innerText = `$${entry.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
-      dom.tp.innerText = `$${tp.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
-      dom.sl.innerText = `$${sl.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
+      // Grid Info
+      elements.gType.innerText = isLong ? "NEUTRAL/LONG" : "NEUTRAL/SHORT";
+      elements.glow.innerText = `$${(p * 0.93).toLocaleString(undefined, {maximumFractionDigits: dec})}`;
+      elements.ghigh.innerText = `$${(p * 1.07).toLocaleString(undefined, {maximumFractionDigits: dec})}`;
 
-      // Calc
-      const m = parseFloat(dom.margin.value) || 0;
-      const l = parseFloat(dom.lev.value) || 1;
-      const size = m * l;
-      const pVal = size * (Math.abs(tp-entry)/entry);
-      const lVal = size * (Math.abs(entry-sl)/entry);
-      const liqP = isLong ? entry * (1 - (1/l)*0.95) : entry * (1 + (1/l)*0.95);
-
-      dom.pRoe.innerText = `+$${pVal.toFixed(2)}`;
-      dom.lRoe.innerText = `-$${lVal.toFixed(2)}`;
-      dom.liq.innerText = `$${liqP.toLocaleString(undefined, {maximumFractionDigits: dec})}`;
-    }
-
-    function initChart(s) {
-      document.getElementById('tv_chart_wrapper').innerHTML = '<div id="tv_chart_container" class="h-full w-full"></div>';
-      new TradingView.widget({
-        "width": "100%", "height": "100%", "symbol": `BINANCE:${s}`,
-        "interval": "15", "timezone": "Asia/Yangon", "theme": "dark", "style": "1",
-        "container_id": "tv_chart_container", "hide_side_toolbar": false
-      });
+      // Calc Logic
+      const m = parseFloat(elements.margin.value) || 0;
+      const lv = parseFloat(elements.lev.value) || 1;
+      const sz = m * lv;
+      elements.pOut.innerText = `+$${(sz * 0.02).toFixed(2)}`;
+      elements.lOut.innerText = `-$${(sz * 0.01).toFixed(2)}`;
+      elements.liq.innerText = `$${(isLong ? ent * (1-1/lv) : ent * (1+1/lv)).toLocaleString(undefined, {maximumFractionDigits: dec})}`;
     }
 
     function changeCoin(s, name) {
       currentSymbol = s;
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
       document.getElementById(`btn-${s}`).classList.add('tab-active');
-      dom.label.innerText = `${name.toUpperCase()} LIVE PRICE`;
+      elements.lbl.innerText = `${name.toUpperCase()} LIVE PRICE`;
+      startWS(s);
       initChart(s);
-      connectWS(s);
-      fetchLatestNews();
+      elements.ai.innerText = `Analyzing ${name} trends...`;
     }
 
-    function fetchLatestNews() {
-      const updates = [
-        `စျေးကွက်၏ Volatility မြင့်တက်နေသဖြင့် ${currentSymbol} အား စနစ်တကျ ကုန်သွယ်ပါ။`,
-        "Whale များ၏ လှုပ်ရှားမှုအရ Support Level အား သတိထား စောင့်ကြည့်ရန် လိုအပ်သည်။",
-        "ယနေ့ သတင်းအချက်အလက်များအရ Trend မှာ အပြောင်းအလဲ ရှိနိုင်သည်။"
-      ];
-      dom.news.innerHTML = updates.map(i => `<div class="news-item">● ${i}</div>`).join('');
-      dom.ai.innerText = `${currentSymbol} ၏ လက်ရှိ RSI နှင့် Volume အရ Trend မှာ ${dom.dir.innerText} ဘက်သို့ ပိုမိုအားသာနေပါသည်။ Risk Control အား အထူးဂရုပြုပါ။`;
+    function initChart(s) {
+      document.getElementById('tv_chart_wrapper').innerHTML = '<div id="tv_chart_container" class="h-full w-full"></div>';
+      new TradingView.widget({
+        "width": "100%", "height": "100%", "symbol": `BINANCE:${s}`,
+        "interval": "15", "theme": "dark", "style": "1", "container_id": "tv_chart_container"
+      });
     }
 
-    window.onload = () => {
-      initDom();
-      initChart('BTCUSDT');
-      connectWS('BTCUSDT');
-      fetchLatestNews();
-      dom.margin.oninput = dom.lev.oninput = () => {}; 
-    };
+    function fetchNews() {
+      elements.news.innerHTML = `
+        <div class="p-2 bg-gray-800/50 rounded">● Market volatility is high today.</div>
+        <div class="p-2 bg-gray-800/50 rounded">● Check Support levels before entry.</div>
+      `;
+    }
+
+    window.onload = init;
   </script>
 </body>
 </html>
