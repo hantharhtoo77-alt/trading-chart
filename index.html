@@ -23,15 +23,15 @@
     .stats-card {
       background: #121318;
       border: 1px solid #1e2026;
-      border-radius: 16px;
+      border-radius: 14px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .stats-card:hover {
       border-color: #303339;
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
     .tab-btn {
-      padding: 10px 14px;
+      padding: 8px 12px;
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
@@ -46,7 +46,7 @@
       background: #f3ba2f;
       color: #000000;
       border-color: #f3ba2f;
-      box-shadow: 0 4px 14px rgba(243, 186, 47, 0.35);
+      box-shadow: 0 3px 10px rgba(243, 186, 47, 0.3);
     }
     .price-font {
       font-family: 'JetBrains Mono', monospace;
@@ -55,11 +55,11 @@
     .news-item {
       border-left: 3px solid #3b82f6;
       background: #16181d;
-      padding: 12px;
-      margin-bottom: 12px;
+      padding: 10px;
+      margin-bottom: 10px;
       border-radius: 0 8px 8px 0;
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 12px;
+      line-height: 1.6;
     }
     .neon-green {
       text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
@@ -104,22 +104,22 @@
 <body class="p-3 md:p-6 bg-[#0b0e11] w-full">
   <div class="max-w-7xl mx-auto w-full space-y-4">
     <!-- Main Top Bar: Responsive Grid -->
-    <div class="flex flex-col xl:flex-row justify-between items-center bg-[#121318] p-4 md:p-6 rounded-2xl border border-[#1e2026] gap-4">
+    <div class="flex flex-col xl:flex-row justify-between items-center bg-[#121318] p-4 md:p-5 rounded-2xl border border-[#1e2026] gap-4">
       <div class="text-center xl:text-left w-full xl:w-auto">
-        <h1 class="text-2xl md:text-3xl font-black bg-gradient-to-r from-[#f3ba2f] to-[#ffd700] bg-clip-text text-transparent tracking-wide leading-tight">
-          ဟန်သာ FUTURES & GRID BOT <span class="text-xs bg-yellow-500 text-black px-2 py-0.5 rounded ml-1 font-mono">PRO V19 MTF</span>
+        <h1 class="text-xl md:text-2xl font-black bg-gradient-to-r from-[#f3ba2f] to-[#ffd700] bg-clip-text text-transparent tracking-wide leading-tight">
+          ဟန်သာ FUTURES & GRID BOT <span class="text-[10px] bg-yellow-500 text-black px-1.5 py-0.5 rounded ml-1 font-mono">PRO V19 MTF</span>
         </h1>
-        <p class="text-[10px] md:text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">
+        <p class="text-[9px] md:text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">
           Multi-Timeframe Analysis (15M, 1H, 4H) • Real-time Futures API • AI Strategy Advisor
         </p>
       </div>
       <!-- Sound Switcher & Coin Selector -->
       <div class="flex flex-col md:flex-row items-center justify-center xl:justify-end gap-3 w-full xl:w-auto">
-        <button id="sound-btn" onclick="toggleSound()" class="w-full md:w-auto px-4 py-2.5 rounded-lg text-[11px] font-black bg-red-950 text-red-400 border border-red-800 hover:bg-red-900/50 transition flex items-center justify-center gap-1.5 min-h-[44px]">
-          <span id="sound-icon">🔇</span> <span id="sound-text">SOUND OFF (CLICK TO ON)</span>
+        <button id="sound-btn" onclick="toggleSound()" class="w-full md:w-auto px-4 py-2 rounded-lg text-[10px] font-black bg-red-950 text-red-400 border border-red-800 hover:bg-red-900/50 transition flex items-center justify-center gap-1.5 min-h-[40px]">
+          <span id="sound-icon">🔇</span> <span id="sound-text">SOUND OFF</span>
         </button>
         <!-- Horizontal scroll on mobile -->
-        <div id="coin-tabs" class="flex overflow-x-auto md:flex-wrap gap-1.5 w-full md:w-auto justify-start md:justify-center pb-2 md:pb-0 scrollbar-none custom-scroll">
+        <div id="coin-tabs" class="flex overflow-x-auto md:flex-wrap gap-1.5 w-full md:w-auto justify-start md:justify-center pb-1.5 md:pb-0 scrollbar-none custom-scroll">
           <div onclick="changeCoin('BTCUSDT', 'Bitcoin')" class="tab-btn tab-active flex-shrink-0" id="btn-BTCUSDT">BTC</div>
           <div onclick="changeCoin('ETHUSDT', 'Ethereum')" class="tab-btn flex-shrink-0" id="btn-ETHUSDT">ETH</div>
           <div onclick="changeCoin('SOLUSDT', 'Solana')" class="tab-btn flex-shrink-0" id="btn-SOLUSDT">SOL</div>
@@ -132,22 +132,22 @@
       </div>
     </div>
 
-    <!-- UPPER ROW: Side-by-Side Unified Layout (Combined Matrix Card on Left, Live Chart on Right) -->
+    <!-- UPPER ROW: Side-by-Side Unified Layout (Compact Matrix Left, Live Chart Right) -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
       
-      <!-- 1. UNIFIED LIVE PRICE & MULTI-TIMEFRAME MATRIX CARD (Exact styling match with Image & Custom Grid Request) -->
-      <div class="lg:col-span-1 rounded-2xl border-2 border-[#f3ba2f] bg-[#121318] p-5 md:p-6 flex flex-col justify-between shadow-2xl space-y-4 lg:h-[635px]">
+      <!-- 1. UNIFIED COMPACT CARD (Exact Golden Frame with Beautiful 50% Shorter Grid Layout) -->
+      <div class="lg:col-span-1 rounded-2xl border-2 border-[#f3ba2f] bg-[#121318] p-4 md:p-5 flex flex-col justify-between shadow-2xl space-y-3 lg:h-[480px]">
         
         <!-- A. Live Price Section (အကွက်ကြီး) -->
         <div class="text-center flex flex-col items-center justify-center pt-1">
-          <span class="text-xs text-gray-400 uppercase tracking-widest font-extrabold" id="coin-label">BITCOIN LIVE PRICE</span>
-          <div id="live-price" class="text-3xl md:text-5xl price-font text-white my-2 font-extrabold tracking-tight">$ --,---</div>
-          <div id="price-percent" class="text-sm md:text-base font-black transition-all">--%</div>
+          <span class="text-[10px] text-gray-400 uppercase tracking-widest font-extrabold" id="coin-label">BITCOIN LIVE PRICE</span>
+          <div id="live-price" class="text-2xl md:text-3xl lg:text-4xl price-font text-white my-1 font-extrabold tracking-tight">$ --,---</div>
+          <div id="price-percent" class="text-xs md:text-sm font-black transition-all">--%</div>
           
-          <!-- Live Status Capsule exactly matching image layout -->
-          <div class="mt-3.5 bg-[#16181d] border border-gray-800/80 rounded-xl px-4 py-2.5 w-full shadow-inner flex items-center justify-center text-center">
-            <p id="ema-alert-badge" class="text-[11px] font-bold text-[#f3ba2f] leading-normal tracking-wide">
-              📊 Multi-Timeframe status: Loading market structure...
+          <!-- Live Status Capsule matching image layout - Compact & neat -->
+          <div class="mt-2 bg-[#16181d] border border-gray-800/80 rounded-xl px-3 py-2 w-full shadow-inner flex items-center justify-center text-center">
+            <p id="ema-alert-badge" class="text-[10px] font-bold text-[#f3ba2f] leading-normal tracking-wide">
+              📊 Multi-Timeframe status: Loading market...
             </p>
           </div>
         </div>
@@ -157,45 +157,45 @@
 
         <!-- B. Multi-Timeframe Matrix Section -->
         <div class="flex flex-col flex-grow justify-between">
-          <h3 class="text-xs uppercase tracking-wider text-indigo-400 font-extrabold mb-2.5 flex items-center gap-2">
-            <span>📊</span> MULTI-TIMEFRAME MATRIX (အချိန်ဇယားအလိုက် စျေးကွက်သုံးသပ်ချက်)
+          <h3 class="text-[10px] uppercase tracking-wider text-indigo-400 font-extrabold mb-2 flex items-center gap-1.5">
+            <span>📊</span> MULTI-TIMEFRAME MATRIX (အကွက်ချသုံးသပ်ချက်)
           </h3>
           
-          <div class="space-y-3 flex flex-col justify-between h-full">
+          <div class="space-y-2 flex flex-col justify-between h-full">
             
             <!-- Side-by-Side Grid for 15M and 1H (အကွက်သေးများ) -->
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 gap-2.5">
               <!-- 15M (Micro) - Left Small Box -->
-              <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/60 flex flex-col justify-between">
-                <div class="flex flex-col border-b border-gray-800/40 pb-1.5 mb-2">
-                  <span class="font-extrabold text-[11px] text-gray-200">15M Timeframe</span>
-                  <span id="mtf-status-15m" class="mt-1 px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-[#2b2f36] text-gray-400 uppercase tracking-wider text-center block w-max">STABLE</span>
+              <div class="bg-[#16181d] p-2.5 rounded-xl border border-gray-800/60 flex flex-col justify-between min-h-[90px]">
+                <div class="flex flex-col border-b border-gray-800/40 pb-1 mb-1.5">
+                  <span class="font-extrabold text-[10px] text-gray-200">15M Timeframe</span>
+                  <span id="mtf-status-15m" class="mt-0.5 px-1 py-0.5 rounded text-[8px] font-extrabold bg-[#2b2f36] text-gray-400 uppercase tracking-wider text-center block w-max">STABLE</span>
                 </div>
-                <div class="space-y-1.5 text-[11px] font-semibold">
-                  <div class="flex flex-col">
-                    <span class="text-gray-500 text-[10px]">EMA Trend:</span>
+                <div class="space-y-1 text-[10px] font-semibold">
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">EMA:</span>
                     <span id="mtf-ema-15m" class="font-black text-green-400 neon-green">--</span>
                   </div>
-                  <div class="flex flex-col border-t border-gray-800/20 pt-1">
-                    <span class="text-gray-500 text-[10px]">RSI:</span>
+                  <div class="flex justify-between border-t border-gray-800/20 pt-0.5">
+                    <span class="text-gray-500">RSI:</span>
                     <span id="mtf-rsi-15m" class="font-mono font-black text-white">--</span>
                   </div>
                 </div>
               </div>
 
               <!-- 1H (Intraday) - Right Small Box -->
-              <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/60 flex flex-col justify-between">
-                <div class="flex flex-col border-b border-gray-800/40 pb-1.5 mb-2">
-                  <span class="font-extrabold text-[11px] text-gray-200">1H Timeframe</span>
-                  <span id="mtf-status-1h" class="mt-1 px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-[#2b2f36] text-gray-400 uppercase tracking-wider text-center block w-max">STABLE</span>
+              <div class="bg-[#16181d] p-2.5 rounded-xl border border-gray-800/60 flex flex-col justify-between min-h-[90px]">
+                <div class="flex flex-col border-b border-gray-800/40 pb-1 mb-1.5">
+                  <span class="font-extrabold text-[10px] text-gray-200">1H Timeframe</span>
+                  <span id="mtf-status-1h" class="mt-0.5 px-1 py-0.5 rounded text-[8px] font-extrabold bg-[#2b2f36] text-gray-400 uppercase tracking-wider text-center block w-max">STABLE</span>
                 </div>
-                <div class="space-y-1.5 text-[11px] font-semibold">
-                  <div class="flex flex-col">
-                    <span class="text-gray-500 text-[10px]">EMA Trend:</span>
+                <div class="space-y-1 text-[10px] font-semibold">
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">EMA:</span>
                     <span id="mtf-ema-1h" class="font-black text-red-400 neon-red">--</span>
                   </div>
-                  <div class="flex flex-col border-t border-gray-800/20 pt-1">
-                    <span class="text-gray-500 text-[10px]">RSI:</span>
+                  <div class="flex justify-between border-t border-gray-800/20 pt-0.5">
+                    <span class="text-gray-500">RSI:</span>
                     <span id="mtf-rsi-1h" class="font-mono font-black text-white">--</span>
                   </div>
                 </div>
@@ -203,19 +203,19 @@
             </div>
 
             <!-- 4H (Macro) - Bottom Full-Width Box (အကွက်လတ်) -->
-            <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/60 flex flex-col justify-between mt-1">
-              <div class="flex justify-between items-center border-b border-gray-800/40 pb-2 mb-2.5">
-                <span class="font-extrabold text-xs text-gray-200">4H Timeframe (Macro - စျေးကွက်အဓိကလားရာ)</span>
-                <span id="mtf-status-4h" class="px-2 py-0.5 rounded text-[10px] font-extrabold bg-[#2b2f36] text-gray-400 uppercase tracking-wider">STABLE</span>
+            <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/60 flex flex-col justify-between">
+              <div class="flex justify-between items-center border-b border-gray-800/40 pb-1 mb-2">
+                <span class="font-extrabold text-[11px] text-gray-200">4H Timeframe (စျေးကွက်ပင်မလားရာ)</span>
+                <span id="mtf-status-4h" class="px-2 py-0.5 rounded text-[9px] font-extrabold bg-[#2b2f36] text-gray-400 uppercase tracking-wider">STABLE</span>
               </div>
-              <div class="grid grid-cols-2 gap-4 text-xs font-semibold">
-                <div class="flex justify-between items-center pr-3 border-r border-gray-800/40">
+              <div class="grid grid-cols-2 gap-3 text-[11px] font-semibold">
+                <div class="flex justify-between items-center pr-2 border-r border-gray-800/40">
                   <span class="text-gray-500">EMA Trend:</span>
-                  <span id="mtf-ema-4h" class="font-black text-red-400 neon-red text-sm">--</span>
+                  <span id="mtf-ema-4h" class="font-black text-red-400 neon-red text-xs">--</span>
                 </div>
-                <div class="flex justify-between items-center pl-3">
+                <div class="flex justify-between items-center pl-2">
                   <span class="text-gray-500">RSI Indicator:</span>
-                  <span id="mtf-rsi-4h" class="font-mono font-black text-white text-sm">--</span>
+                  <span id="mtf-rsi-4h" class="font-mono font-black text-white text-xs">--</span>
                 </div>
               </div>
             </div>
@@ -226,7 +226,7 @@
 
       <!-- 2. LIVE TRADINGVIEW CHART CONTAINER -->
       <div class="lg:col-span-2 space-y-4 w-full">
-        <div class="stats-card h-[400px] sm:h-[450px] md:h-[500px] lg:h-[635px] overflow-hidden border border-gray-800 shadow-2xl relative w-full" id="tv_chart_wrapper">
+        <div class="stats-card h-[320px] sm:h-[400px] lg:h-[480px] overflow-hidden border border-gray-800 shadow-2xl relative w-full" id="tv_chart_wrapper">
           <div id="tv_chart_container" class="h-full w-full"></div>
         </div>
       </div>
@@ -234,132 +234,124 @@
     </div>
 
     <!-- DAY TRADING FUTURES STRATEGIC CONTROLS -->
-    <div class="stats-card p-4 md:p-6 border-t-4 border-amber-500 bg-[#121318]">
+    <div class="stats-card p-4 md:p-5 border-t-4 border-amber-500 bg-[#121318]">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
-        <h2 class="text-sm md:text-base font-bold text-amber-400 flex items-center gap-2">
-          <span>🎯</span> Day Trading Strategy & Signal (လမ်းညွှန်ချက် နှင့် ပစ်မှတ်များ)
+        <h2 class="text-xs md:text-sm font-bold text-amber-400 flex items-center gap-2">
+          <span>🎯</span> Day Trading Strategy & Signal (လမ်းညွှန်ချက်များ နှင့် ပစ်မှတ်များ)
         </h2>
-        <span id="target-alert-status" class="text-[10px] bg-gray-900 text-gray-400 px-2 py-1 rounded border border-gray-800 font-bold">🎯 TARGET ALERTS: READY</span>
+        <span id="target-alert-status" class="text-[9px] bg-gray-900 text-gray-400 px-2 py-0.5 rounded border border-gray-800 font-bold">🎯 TARGET ALERTS: READY</span>
       </div>
       <!-- Grid Layout: Responsive 2, 3, 6 columns -->
       <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 text-xs font-bold text-center">
         <!-- 1. Trading Direction -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[85px]">
+        <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Trading Direction (လားရာ)</span>
-          <span id="best-direction" class="text-[13px] font-black tracking-wide text-yellow-500 neon-yellow">ANALYZING...</span>
+          <span id="best-direction" class="text-[12px] font-black tracking-wide text-yellow-500 neon-yellow">ANALYZING...</span>
         </div>
 
         <!-- 2. Safe Entry -->
-        <div id="entry-subcard" class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[85px]">
+        <div id="entry-subcard" class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span id="entry-label" class="text-gray-500 uppercase text-[9px] mb-1">Safe Entry (ဝင်ရမည့်ဈေး)</span>
-          <span id="target-buy" class="text-[13px] price-font text-green-400">$ --,---</span>
+          <span id="target-buy" class="text-[12px] price-font text-green-400">$ --,---</span>
         </div>
         
         <!-- 3. Dynamic Win Rate % -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[85px]">
+        <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Est. Win Rate (အမြတ်ရနိုင်ခြေ)</span>
-          <span id="win-rate" class="text-[13px] font-black price-font text-emerald-400 neon-emerald">--%</span>
+          <span id="win-rate" class="text-[12px] font-black price-font text-emerald-400 neon-emerald">--%</span>
         </div>
 
         <!-- 4. Entry Confidence Score -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[85px]">
+        <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">တိကျသေချာမှု (Confidence)</span>
-          <span id="entry-confidence" class="text-[13px] font-black price-font text-blue-400 neon-blue">--%</span>
+          <span id="entry-confidence" class="text-[12px] font-black price-font text-blue-400 neon-blue">--%</span>
         </div>
 
         <!-- 5. Take Profit -->
-        <div id="tp-subcard" class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[85px]">
+        <div id="tp-subcard" class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span id="tp-label" class="text-gray-500 uppercase text-[9px] mb-1">Take Profit (အမြတ်ယူဈေး)</span>
-          <span id="target-tp" class="text-[13px] price-font text-blue-400">$ --,---</span>
+          <span id="target-tp" class="text-[12px] price-font text-blue-400">$ --,---</span>
         </div>
 
         <!-- 6. Stop Loss -->
-        <div id="sl-subcard" class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[85px]">
+        <div id="sl-subcard" class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span id="sl-label" class="text-gray-500 uppercase text-[9px] mb-1">Stop Loss (ရှုံးရင်ဖြတ်ဈေး)</span>
-          <span id="target-sl" class="text-[13px] price-font text-red-400">$ --,---</span>
+          <span id="target-sl" class="text-[12px] price-font text-red-400">$ --,---</span>
         </div>
       </div>
-      <p class="text-[10px] text-gray-500 font-normal italic mt-3 text-right">
-        * 15M, 1H နှင့် 4H Timeframes ၃ ခု၏ Trend, Volume, RSI နှင့် EMA တို့ကို Dynamic အချိုးချပေါင်းစပ်တွက်ချက်ထားခြင်းဖြစ်ပါသည်။
-      </p>
     </div>
 
     <!-- DYNAMIC FUTURES GRID BOT STRATEGY GENERATOR -->
-    <div class="stats-card p-4 md:p-6 border-t-4 border-teal-500 bg-[#121318]">
-      <h2 class="text-sm md:text-base font-bold text-teal-400 mb-4 flex items-center gap-2">
+    <div class="stats-card p-4 md:p-5 border-t-4 border-teal-500 bg-[#121318]">
+      <h2 class="text-xs md:text-sm font-bold text-teal-400 mb-4 flex items-center gap-2">
         <span>🤖</span> Live Futures Grid Bot Strategy (စက်ရုပ်အလိုအလျောက် ကုန်သွယ်မှုသတ်မှတ်ချက်များ)
       </h2>
       <!-- Grid Layout: Responsive 2, 4, 7 columns -->
       <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-7 gap-3 text-xs font-bold text-center">
         <!-- 1. Grid Type -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[80px]">
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Grid Type</span>
-          <span id="grid-recommend-type" class="text-[13px] text-yellow-500">Calculating...</span>
+          <span id="grid-recommend-type" class="text-[12px] text-yellow-500">Calculating...</span>
         </div>
         
         <!-- 2. Lower Price -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[80px]">
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Lower Price (အနိမ့်ဆုံး)</span>
-          <span id="grid-lower-price" class="text-[13px] text-green-400 font-mono">$ --,---</span>
+          <span id="grid-lower-price" class="text-[12px] text-green-400 font-mono">$ --,---</span>
         </div>
         
         <!-- 3. Upper Price -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[80px]">
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Upper Price (အမြင့်ဆုံး)</span>
-          <span id="grid-upper-price" class="text-[13px] text-red-400 font-mono">$ --,---</span>
+          <span id="grid-upper-price" class="text-[12px] text-red-400 font-mono">$ --,---</span>
         </div>
 
         <!-- 4. Grid Win Rate -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[80px]">
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Grid Win Rate</span>
-          <span id="grid-win-rate" class="text-[13px] font-black price-font text-emerald-400 neon-emerald">--%</span>
+          <span id="grid-win-rate" class="text-[12px] font-black price-font text-emerald-400 neon-emerald">--%</span>
         </div>
 
         <!-- 5. Grid Confidence -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[80px]">
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Grid Confidence</span>
-          <span id="grid-confidence" class="text-[13px] font-black price-font text-blue-400 neon-blue">--%</span>
+          <span id="grid-confidence" class="text-[12px] font-black price-font text-blue-400 neon-blue">--%</span>
         </div>
 
         <!-- 6. Grid Count -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[80px]">
-          <span class="text-gray-500 uppercase text-[9px] mb-1">Grid Count Suggestions</span>
-          <span id="grid-count" class="text-[13px] text-blue-400">40 - 75 Grids</span>
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
+          <span class="text-gray-500 uppercase text-[9px] mb-1">Grid Suggestions</span>
+          <span id="grid-count" class="text-[12px] text-blue-400">40 - 75 Grids</span>
         </div>
         
         <!-- 7. Est. Profit per Grid -->
-        <div class="bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center col-span-2 sm:col-span-2 xl:col-span-1 min-h-[80px]">
-          <span class="text-gray-500 uppercase text-[9px] mb-1">Est. Profit per Grid</span>
-          <span id="grid-profit" class="text-[13px] text-emerald-400">0.30% - 0.90%</span>
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center col-span-2 sm:col-span-2 xl:col-span-1 min-h-[75px]">
+          <span class="text-gray-500 uppercase text-[9px] mb-1">Est. Profit/Grid</span>
+          <span id="grid-profit" class="text-[12px] text-emerald-400">0.30% - 0.90%</span>
         </div>
       </div>
-      <p class="text-[10px] text-gray-500 font-normal italic mt-3 text-right">
-        * 1H & 4H High-Low Bounds များကို အသုံးပြု၍ ပိုမိုခိုင်မာတိကျသော Grid Bot Range သတ်မှတ်ပေးထားပါသည်။
-      </p>
     </div>
 
     <!-- TIMEFRAME WARNINGS -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
       <!-- Best Times to Enter -->
-      <div class="stats-card p-5 border-l-4 border-emerald-500 bg-emerald-950/5">
-        <h3 class="text-xs md:text-sm uppercase tracking-wider text-emerald-400 mb-3 flex items-center gap-1.5">
+      <div class="stats-card p-4.5 border-l-4 border-emerald-500 bg-emerald-950/5">
+        <h3 class="text-xs md:text-sm uppercase tracking-wider text-emerald-400 mb-2 flex items-center gap-1.5">
           <span>🟢</span> Best Times to Enter (စျေးကွက်ထဲဝင်ရန် အကောင်းဆုံးအချိန်များ)
         </h3>
-        <ul class="text-xs text-gray-300 space-y-2 list-disc pl-4 font-normal">
-          <li>1H သို့မဟုတ် 4H Timeframe တွင် RSI Level ၃၀ အောက် (Oversold) ရောက်ရှိကာ Support line သို့ရောက်ရှိချိန်။</li>
-          <li>15M, 1H နှင့် 4H EMA Trend အားလုံးသည် တူညီသော ဘက်တစ်ဖက်တည်းသို့ ဦးတည်ပြသနေချိန် (Trend Alignment)။</li>
-          <li>အမေရိကန်/ဥရောပ စျေးကွက်ဖွင့်ချိန်များဖြစ်သော <span class="text-emerald-400 font-bold">မြန်မာစံတော်ချိန် နေ့လယ် ၁၂:၃၀ မှ ည ၈:၃၀ အကြား</span> Volume အများဆုံးအချိန်။</li>
+        <ul class="text-xs text-gray-300 space-y-1.5 list-disc pl-4 font-normal">
+          <li>1H သို့မဟုတ် 4H Timeframe တွင် RSI Level ၃၀ အောက် ရောက်ရှိချိန်။</li>
+          <li>15M, 1H နှင့် 4H Trend အားလုံးသည် တူညီသော ဘက်တစ်ဖက်တည်းသို့ ဦးတည်ပြသနေချိန်။</li>
         </ul>
       </div>
       <!-- Times to Avoid -->
-      <div class="stats-card p-5 border-l-4 border-red-500 bg-red-950/5">
-        <h3 class="text-xs md:text-sm uppercase tracking-wider text-red-400 mb-3 flex items-center gap-1.5">
+      <div class="stats-card p-4.5 border-l-4 border-red-500 bg-red-950/5">
+        <h3 class="text-xs md:text-sm uppercase tracking-wider text-red-400 mb-2 flex items-center gap-1.5">
           <span>🔴</span> When to Avoid (ကုန်သွယ်ခြင်းမှ လုံးဝရှောင်ရှားရမည့်အချိန်များ)
         </h3>
-        <ul class="text-xs text-gray-300 space-y-2 list-disc pl-4 font-normal">
-          <li>Timeframe တစ်ခုနှင့်တစ်ခု လားရာမတူညီဘဲ ဆန့်ကျင်ဘက်ဖြစ်နေချိန် (ဥပမာ- 4H Bearish ဖြစ်ပြီး 15M Bullish ဖြစ်နေချိန်)။</li>
-          <li>အမေရိကန်အစိုးရ၏ <span class="text-red-400 font-bold">Fed အတိုးနှုန်းသတ်မှတ်ချက် သို့မဟုတ် CPI သတင်းများ</span> မထွက်ခွာမီ ၁ နာရီနှင့် ထွက်ပြီး နာရီဝက်အတွင်း။</li>
-          <li>တနင်္ဂနွေနေ့နှင့် အားလပ်ရက်များတွင် Volume ကျဆင်းကာ Spread အလွန်ကျယ်ပြန့်နေချိန်။</li>
+        <ul class="text-xs text-gray-300 space-y-1.5 list-disc pl-4 font-normal">
+          <li>Timeframe တစ်ခုနှင့်တစ်ခု လားရာမတူညီဘဲ ဆန့်ကျင်ဘက်ဖြစ်နေချိန်။</li>
+          <li>အမေရိကန်အစိုးရ၏ Fed အတိုးနှုန်းသတ်မှတ်ချက် သို့မဟုတ် CPI သတင်းများမထွက်ခွာမီ။</li>
         </ul>
       </div>
     </div>
@@ -369,77 +361,76 @@
       <!-- Calculators & AI Section -->
       <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
         <!-- Advanced Futures Risk Calculator -->
-        <div class="stats-card p-5 border-t-4 border-blue-500 bg-[#121318] flex flex-col justify-between min-h-[250px]">
+        <div class="stats-card p-5 border-t-4 border-blue-500 bg-[#121318] flex flex-col justify-between min-h-[220px]">
           <div>
-            <h2 class="text-sm md:text-base font-bold text-blue-400 mb-4 flex items-center gap-2">
+            <h2 class="text-xs md:text-sm font-bold text-blue-400 mb-3 flex items-center gap-2">
               <span>🧮</span> Futures Leverage & Risk Calculator (အဆင့်မြင့်အမြတ်/အရှုံး တွက်စက်)
             </h2>
-            <div class="space-y-3.5 text-xs font-normal">
+            <div class="space-y-3 text-xs font-normal">
               <div class="flex justify-between items-center">
                 <span class="text-gray-400 font-bold">Leverage (မြှောက်ဖော်ကိန်း):</span>
                 <div class="flex items-center gap-1">
-                  <input type="number" id="leverage-input" value="20" min="1" max="125" class="w-20 bg-gray-800 border border-gray-700 text-center rounded text-white p-1.5 font-bold font-mono focus:border-blue-500 focus:outline-none min-h-[38px]">
+                  <input type="number" id="leverage-input" value="20" min="1" max="125" class="w-16 bg-gray-800 border border-gray-700 text-center rounded text-white p-1 font-bold font-mono focus:border-blue-500 focus:outline-none min-h-[34px]">
                   <span class="font-bold text-yellow-500">x</span>
                 </div>
               </div>
               <div class="flex justify-between items-center">
                 <span class="text-gray-400 font-bold">Margin / Investment ($):</span>
-                <input type="number" id="margin-input" value="100" min="1" class="w-28 bg-gray-800 border border-gray-700 text-center rounded text-white p-1.5 font-bold font-mono focus:border-blue-500 focus:outline-none min-h-[38px]">
+                <input type="number" id="margin-input" value="100" min="1" class="w-24 bg-gray-800 border border-gray-700 text-center rounded text-white p-1 font-bold font-mono focus:border-blue-500 focus:outline-none min-h-[34px]">
               </div>
-              <div class="border-t border-gray-800/80 my-2 pt-2"></div>
+              <div class="border-t border-gray-800/80 my-1.5 pt-1.5"></div>
               <div class="flex justify-between items-center font-bold">
                 <span class="text-green-400">Est. Profit (Target TP):</span>
-                <span id="est-profit-roe" class="text-green-400 font-mono text-[13px]">+0.00% ($0.00)</span>
+                <span id="est-profit-roe" class="text-green-400 font-mono text-xs">+0.00% ($0.00)</span>
               </div>
               <div class="flex justify-between items-center font-bold">
                 <span class="text-red-400">Est. Loss (Strict SL):</span>
-                <span id="est-loss-roe" class="text-red-400 font-mono text-[13px]">-0.00% ($0.00)</span>
+                <span id="est-loss-roe" class="text-red-400 font-mono text-xs">-0.00% ($0.00)</span>
               </div>
-              <div class="flex justify-between items-center font-bold text-[11px] border-t border-gray-800/50 pt-2">
+              <div class="flex justify-between items-center font-bold text-[11px] border-t border-gray-800/50 pt-1.5">
                 <span class="text-orange-400">Est. Liq. Price (ခန့်မှန်းလောင်ဈေး):</span>
-                <span id="est-liq-price" class="text-orange-400 font-mono text-[13px]">$0.00</span>
+                <span id="est-liq-price" class="text-orange-400 font-mono text-xs">$0.00</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- AI Scalping Advisory -->
-        <div class="stats-card p-5 border-t-4 border-yellow-500 bg-[#121318] flex flex-col justify-between min-h-[250px]">
+        <div class="stats-card p-5 border-t-4 border-yellow-500 bg-[#121318] flex flex-col justify-between min-h-[220px]">
           <div>
-            <h2 class="text-sm md:text-base font-bold text-yellow-500 mb-4 flex items-center gap-2">
+            <h2 class="text-xs md:text-sm font-bold text-yellow-500 mb-3 flex items-center gap-2">
               <span>🤖</span> Real-time AI Futures Advisor (AI သုံးသပ်ချက်)
             </h2>
-            <div id="ai-insight" class="text-xs text-gray-300 leading-relaxed italic min-h-[120px] max-h-[180px] overflow-y-auto custom-scroll pr-1">
+            <div id="ai-insight" class="text-xs text-gray-300 leading-relaxed italic min-h-[100px] max-h-[140px] overflow-y-auto custom-scroll pr-1">
               ဈေးကွက်ဒေတာများကို AI မှ စစ်ဆေးသုံးသပ်နေပါသည်...
             </div>
           </div>
-          <div class="mt-4 flex justify-end">
+          <div class="mt-2 flex justify-end">
             <span class="text-[9px] bg-yellow-500/10 text-yellow-500 px-2 py-0.5 rounded uppercase font-mono font-bold">Multi-Timeframe Strategy</span>
           </div>
         </div>
       </div>
 
       <!-- Right Column: Live News & Policy Updates -->
-      <div class="stats-card p-5 flex flex-col justify-between border border-gray-800 bg-[#121318] w-full lg:col-span-1 min-h-[300px]">
+      <div class="stats-card p-5 flex flex-col justify-between border border-gray-800 bg-[#121318] w-full lg:col-span-1 min-h-[220px]">
         <div>
-          <div class="flex justify-between items-center mb-4 border-b border-gray-800 pb-3">
+          <div class="flex justify-between items-center mb-3 border-b border-gray-800 pb-2">
             <h3 class="text-xs font-bold text-blue-400 flex items-center gap-2">
-              <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-              LIVE CRYPTO NEWS (REAL-TIME)
+              <span class="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
+              LIVE NEWS
             </h3>
-            <span class="text-[9px] bg-blue-500/10 px-2 py-0.5 rounded text-blue-400 font-bold uppercase tracking-widest">Live Auto-Translate</span>
+            <span class="text-[8px] bg-blue-500/10 px-1.5 py-0.5 rounded text-blue-400 font-bold uppercase">Live Translate</span>
           </div>
           <!-- Guaranteed Live News Feed List -->
-          <div id="news-list" class="overflow-y-auto max-h-[220px] pr-1 space-y-3">
-            <div class="space-y-4">
-              <div class="h-14 shimmer rounded-lg w-full"></div>
-              <div class="h-14 shimmer rounded-lg w-full"></div>
-              <div class="h-14 shimmer rounded-lg w-full"></div>
+          <div id="news-list" class="overflow-y-auto max-h-[130px] pr-1 space-y-2">
+            <div class="space-y-3">
+              <div class="h-10 shimmer rounded-lg w-full"></div>
+              <div class="h-10 shimmer rounded-lg w-full"></div>
             </div>
           </div>
         </div>
-        <button onclick="fetchLatestNews(true)" id="news-update-btn" class="mt-4 w-full py-3 bg-[#1e2026] hover:bg-[#2b2f36] rounded-lg text-[10px] font-black text-white transition uppercase tracking-wider border border-gray-800 focus:outline-none min-h-[44px]">
-          🔄 UPDATE LIVE NEWS NOW
+        <button onclick="fetchLatestNews(true)" id="news-update-btn" class="mt-3 w-full py-2 bg-[#1e2026] hover:bg-[#2b2f36] rounded-lg text-[9px] font-black text-white transition uppercase tracking-wider border border-gray-800 focus:outline-none min-h-[36px]">
+          🔄 UPDATE LIVE NEWS
         </button>
       </div>
     </div>
@@ -597,21 +588,21 @@
           }, 200);
         }
       } catch (err) {
-        console.warn("Audio Context is blocked or failed to initialize", err);
+        console.warn("Audio Context blocked", err);
       }
     }
 
     function toggleSound() {
       soundEnabled = !soundEnabled;
       if (soundEnabled) {
-        domElements.soundBtn.className = "w-full md:w-auto px-4 py-2.5 rounded-lg text-[11px] font-black bg-emerald-950 text-emerald-400 border border-emerald-800 hover:bg-emerald-900/50 transition flex items-center justify-center gap-1.5 animate-pulse min-h-[44px]";
+        domElements.soundBtn.className = "w-full md:w-auto px-4 py-2 rounded-lg text-[10px] font-black bg-emerald-950 text-emerald-400 border border-emerald-800 hover:bg-emerald-900/50 transition flex items-center justify-center gap-1.5 animate-pulse min-h-[40px]";
         domElements.soundIcon.innerText = "🔊";
         domElements.soundText.innerText = "SOUND ON";
         playBeep('cross');
       } else {
-        domElements.soundBtn.className = "w-full md:w-auto px-4 py-2.5 rounded-lg text-[11px] font-black bg-red-950 text-red-400 border border-red-800 hover:bg-red-900/50 transition flex items-center justify-center gap-1.5 min-h-[44px]";
+        domElements.soundBtn.className = "w-full md:w-auto px-4 py-2 rounded-lg text-[10px] font-black bg-red-950 text-red-400 border border-red-800 hover:bg-red-900/50 transition flex items-center justify-center gap-1.5 min-h-[40px]";
         domElements.soundIcon.innerText = "🔇";
-        domElements.soundText.innerText = "SOUND OFF (CLICK TO ON)";
+        domElements.soundText.innerText = "SOUND OFF";
       }
     }
     
@@ -621,11 +612,11 @@
         "ယူအက်စ်အစိုးရနှင့် FED မှ Crypto ပိုင်ဆိုင်မှုအပေါ် အခွန်စည်းကြပ်ရေးဥပဒေကြမ်းအသစ်ကို ဆွေးနွေးရန် ပြင်ဆင်နေ။",
         "SEC ဥက္ကဋ္ဌမှ Bitcoin spot ETFs စည်းမျဉ်းအသစ်များကို အပြုသဘောဆောင်သော သုံးသပ်ချက်များဖြင့် ထပ်မံဖြေလျှော့ပေးရန် စဉ်းစားနေ။",
         "လွန်ခဲ့သော ၃ နာရီအတွင်း ဝေလငါးကြီးများက ယူအက်စ်ဒေါ်လာ သန်း ၃၅၀ ဖိုးရှိသော BTC ကို လုံခြုံသော ပိုက်ဆံအိတ်များသို့ စုဆောင်းသိမ်းဆည်း။",
-        "အမေရိမန် ငွေတိုက်ဌာနက Bitcoin စျေးကွက်အတွင်း နိုင်ငံတကာ ရင်းနှီးမြှုပ်နှံမှု အခွင့်အလမ်းများကို တိုးမြှင့်ရန် စီစဉ်နေ။"
+        "အမေရိကန် ငွေတိုက်ဌာနက Bitcoin စျေးကွက်အတွင်း နိုင်ငံတကာ ရင်းနှီးမြှုပ်နှံမှု အခွင့်အလမ်းများကို တိုးမြှင့်ရန် စီစဉ်နေ။"
       ],
       "ETHUSDT": [
         "Ethereum Layer-2 ကွန်ရက်များ၏ အရောင်းအဝယ်ပမာဏသည် စံချိန်တင် မြင့်တက်လာပြီး ဓာတ်ငွေ့ခ (Gas fee) ကျဆင်း။",
-        "အမေရိကန် SEC က Ethereum Staking ဝန်ဆောင်မှုပေးသည့် လုပ်ငန်းကြီးများအတွက် ဥပဒေဆိုင်ရာ လမ်းညွှန်ချက်သစ် ထုတ်ပြန်။",
+        "အမေရိကန် SEC က Ethereum Staking ဝန်ဆောင်မှုပေးသည့် လုပ်ငန်းကြီးများအတွက် ဥပဒေဆိုင်ရာ လမ်းညွှချက်သစ် ထုတ်ပြန်။",
         "ရင်းနှီးမြှုပ်နှံမှု အဖွဲ့အစည်းကြီးများက လွန်ခဲ့သော ၂ နာရီအတွင်း ETH အဝယ်စုဆောင်းမှု သိသိသာသာ တိုးမြှင့်ခဲ့။"
       ],
       "SOLUSDT": [
@@ -692,7 +683,7 @@
       currentTargets.symbol = ""; // Reset triggers
       domElements.emaAlertBadge.innerText = "📊 Multi-Timeframe status: Fetching market structure...";
       domElements.targetAlertStatus.innerText = "🎯 TARGET ALERTS: READY";
-      domElements.targetAlertStatus.className = "text-[10px] bg-gray-900 text-gray-400 px-2 py-0.5 rounded border border-gray-800";
+      domElements.targetAlertStatus.className = "text-[9px] bg-gray-900 text-gray-400 px-2 py-0.5 rounded border border-gray-800";
 
       initChart(symbol);
       updateDashboard();
@@ -830,13 +821,12 @@
         const decimalLimit = lastPrice < 1 ? 6 : (lastPrice < 10 ? 4 : 2);
         domElements.livePrice.innerText = `$${lastPrice.toLocaleString(undefined, {maximumFractionDigits: decimalLimit})}`;
         domElements.pricePercent.innerText = `${pChange >= 0 ? '+' : ''}${pChange.toFixed(2)}%`;
-        domElements.pricePercent.className = `text-sm font-bold mt-1 ${pChange >= 0 ? 'text-green-500 neon-green' : 'text-red-500 neon-red'}`;
+        domElements.pricePercent.className = `text-[13px] font-bold mt-0.5 ${pChange >= 0 ? 'text-green-500 neon-green' : 'text-red-500 neon-red'}`;
 
         // Step 2: Complex Multi-Timeframe Processing
         const mtfData = await processMultiTimeframe();
         
         // Apply Weightings to construct trade direction decisions
-        // Weights: 4h Trend = 50%, 1h Trend = 30%, 15m Trend = 20%
         let bullishPoints = 0;
         let totalWeight = 0;
 
@@ -851,7 +841,7 @@
           
           const statusVal = mtfData["15m"].rsi > 70 ? "OVERBOUGHT" : (mtfData["15m"].rsi < 30 ? "OVERSOLD" : "STABLE");
           domElements.mtfStatus15m.innerText = statusVal;
-          domElements.mtfStatus15m.className = `px-2 py-0.5 rounded text-[10px] font-black ${statusVal === 'OVERBOUGHT' ? 'bg-red-950 text-red-400' : (statusVal === 'OVERSOLD' ? 'bg-green-950 text-green-400' : 'bg-[#1e2026] text-gray-400')}`;
+          domElements.mtfStatus15m.className = `px-1.5 py-0.5 rounded text-[8px] font-black ${statusVal === 'OVERBOUGHT' ? 'bg-red-950 text-red-400' : (statusVal === 'OVERSOLD' ? 'bg-green-950 text-green-400' : 'bg-[#1e2026] text-gray-400')}`;
         }
         
         if (mtfData["1h"]) {
@@ -865,7 +855,7 @@
           
           const statusVal = mtfData["1h"].rsi > 70 ? "OVERBOUGHT" : (mtfData["1h"].rsi < 30 ? "OVERSOLD" : "STABLE");
           domElements.mtfStatus1h.innerText = statusVal;
-          domElements.mtfStatus1h.className = `px-2 py-0.5 rounded text-[10px] font-black ${statusVal === 'OVERBOUGHT' ? 'bg-red-950 text-red-400' : (statusVal === 'OVERSOLD' ? 'bg-green-950 text-green-400' : 'bg-[#1e2026] text-gray-400')}`;
+          domElements.mtfStatus1h.className = `px-1.5 py-0.5 rounded text-[8px] font-black ${statusVal === 'OVERBOUGHT' ? 'bg-red-950 text-red-400' : (statusVal === 'OVERSOLD' ? 'bg-green-950 text-green-400' : 'bg-[#1e2026] text-gray-400')}`;
         }
 
         if (mtfData["4h"]) {
@@ -879,7 +869,7 @@
           
           const statusVal = mtfData["4h"].rsi > 70 ? "OVERBOUGHT" : (mtfData["4h"].rsi < 30 ? "OVERSOLD" : "STABLE");
           domElements.mtfStatus4h.innerText = statusVal;
-          domElements.mtfStatus4h.className = `px-2 py-0.5 rounded text-[10px] font-black ${statusVal === 'OVERBOUGHT' ? 'bg-red-950 text-red-400' : (statusVal === 'OVERSOLD' ? 'bg-green-950 text-green-400' : 'bg-[#1e2026] text-gray-400')}`;
+          domElements.mtfStatus4h.className = `px-2 py-0.5 rounded text-[9px] font-black ${statusVal === 'OVERBOUGHT' ? 'bg-red-950 text-red-400' : (statusVal === 'OVERSOLD' ? 'bg-green-950 text-green-400' : 'bg-[#1e2026] text-gray-400')}`;
         }
 
         // Calculate dynamic directional percentage consensus
@@ -889,16 +879,16 @@
         // Custom Multi-timeframe trend matching feedback text
         if (bullishConsensusRatio >= 0.8) {
           domElements.bestDirection.innerText = "STRONG LONG (MTF BULLISH)";
-          domElements.bestDirection.className = "text-[13px] font-black mt-1 text-emerald-400 neon-emerald";
+          domElements.bestDirection.className = "text-[12px] font-black mt-1 text-emerald-400 neon-emerald";
         } else if (bullishConsensusRatio >= 0.5) {
           domElements.bestDirection.innerText = "LONG (MTF WEAK BULLISH)";
-          domElements.bestDirection.className = "text-[13px] font-black mt-1 text-green-400 neon-green";
+          domElements.bestDirection.className = "text-[12px] font-black mt-1 text-green-400 neon-green";
         } else if (bullishConsensusRatio <= 0.2) {
           domElements.bestDirection.innerText = "STRONG SHORT (MTF BEARISH)";
-          domElements.bestDirection.className = "text-[13px] font-black mt-1 text-red-500 neon-red";
+          domElements.bestDirection.className = "text-[12px] font-black mt-1 text-red-500 neon-red";
         } else {
           domElements.bestDirection.innerText = "SHORT (MTF WEAK BEARISH)";
-          domElements.bestDirection.className = "text-[13px] font-black mt-1 text-orange-500 neon-red";
+          domElements.bestDirection.className = "text-[12px] font-black mt-1 text-orange-500 neon-red";
         }
 
         // Multi-timeframe Trend alignment status message inside the capsule
@@ -912,9 +902,9 @@
           if (t15 === t1 && t1 === t4) {
             alignmentText = `📊 Multi-Timeframe status: Triple Alignment (15M/1H/4H) is aligned as ${t15}.`;
           } else if (t1 === t4) {
-            alignmentText = `📊 Multi-Timeframe status: Major Trend (1H/4H) is aligned as ${t1}. 15M (Short Term) is fluctuating.`;
+            alignmentText = `📊 Multi-Timeframe status: Major Trend (1H/4H) is aligned as ${t1}. 15M is fluctuating.`;
           } else {
-            alignmentText = `📊 Multi-Timeframe status: Trend Diverged. 1H is ${t1} while 4H is ${t4}. Caution advised.`;
+            alignmentText = `📊 Multi-Timeframe status: Trend Diverged. 1H is ${t1} while 4H is ${t4}.`;
           }
         }
         domElements.emaAlertBadge.innerText = alignmentText;
@@ -924,7 +914,6 @@
         const trendUnity = Math.abs(bullishConsensusRatio - 0.5) * 2; 
         confidenceScore += Math.round(trendUnity * 30);
         
-        // Multi-timeframe RSI filter
         if (mtfData["1h"]) {
           const r1 = mtfData["1h"].rsi;
           if (isLong && r1 < 40) confidenceScore += 8; 
@@ -934,11 +923,11 @@
         domElements.entryConfidence.innerText = `${confidenceScore}%`;
         
         if (confidenceScore >= 85) {
-          domElements.entryConfidence.className = "text-[13px] font-black price-font text-emerald-400 neon-emerald";
+          domElements.entryConfidence.className = "text-[12px] font-black price-font text-emerald-400 neon-emerald";
         } else if (confidenceScore >= 75) {
-          domElements.entryConfidence.className = "text-[13px] font-black price-font text-green-400 neon-green";
+          domElements.entryConfidence.className = "text-[12px] font-black price-font text-green-400 neon-green";
         } else {
-          domElements.entryConfidence.className = "text-[13px] font-black price-font text-yellow-500 neon-yellow";
+          domElements.entryConfidence.className = "text-[12px] font-black price-font text-yellow-500 neon-yellow";
         }
 
         // Dynamic Win Rate (%)
@@ -953,14 +942,13 @@
         domElements.winRate.innerText = `${calculatedWinRate}%`;
         
         if (calculatedWinRate >= 80) {
-          domElements.winRate.className = "text-[13px] font-black price-font text-emerald-400 neon-emerald";
+          domElements.winRate.className = "text-[12px] font-black price-font text-emerald-400 neon-emerald";
         } else if (calculatedWinRate >= 70) {
-          domElements.winRate.className = "text-[13px] font-black price-font text-green-400 neon-green";
+          domElements.winRate.className = "text-[12px] font-black price-font text-green-400 neon-green";
         } else {
-          domElements.winRate.className = "text-[13px] font-black price-font text-yellow-500 neon-yellow";
+          domElements.winRate.className = "text-[12px] font-black price-font text-yellow-500 neon-yellow";
         }
 
-        // Play alert sound if Dynamic Win Rate climbs past 85%
         if (calculatedWinRate > 85 && lastAlertedWinRate <= 85) {
           playBeep('success');
           lastAlertedWinRate = calculatedWinRate;
@@ -976,32 +964,32 @@
           tp = entry * 1.035;       
           
           domElements.entryLabel.innerText = "Safe Entry (BUY LONG)";
-          domElements.entrySubcard.className = "bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-green-500 min-h-[85px]";
-          domElements.targetBuy.className = "text-[13px] price-font text-green-400";
+          domElements.entrySubcard.className = "bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-green-500 min-h-[75px]";
+          domElements.targetBuy.className = "text-[12px] price-font text-green-400";
           
           domElements.slLabel.innerText = "Stop Loss (ရှုံးရင်ဖြတ်ဈေး)";
-          domElements.slSubcard.className = "bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-red-500 min-h-[85px]";
-          domElements.targetSl.className = "text-[13px] price-font text-red-400";
+          domElements.slSubcard.className = "bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-red-500 min-h-[75px]";
+          domElements.targetSl.className = "text-[12px] price-font text-red-400";
           
           domElements.tpLabel.innerText = "Take Profit (အမြတ်ယူဈေး)";
-          domElements.tpSubcard.className = "bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-blue-500 min-h-[85px]";
-          domElements.targetTp.className = "text-[13px] price-font text-blue-400";
+          domElements.tpSubcard.className = "bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-blue-500 min-h-[75px]";
+          domElements.targetTp.className = "text-[12px] price-font text-blue-400";
         } else {
           entry = lastPrice * 1.007; 
           sl = entry * 1.018;       
           tp = entry * 0.965;       
           
           domElements.entryLabel.innerText = "Safe Entry (SELL SHORT)";
-          domElements.entrySubcard.className = "bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-red-500 min-h-[85px]";
-          domElements.targetBuy.className = "text-[13px] price-font text-red-400";
+          domElements.entrySubcard.className = "bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-red-500 min-h-[75px]";
+          domElements.targetBuy.className = "text-[12px] price-font text-red-400";
           
           domElements.slLabel.innerText = "Stop Loss (ရှုံးရင်ဖြတ်ဈေး - အထက်)";
-          domElements.slSubcard.className = "bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-orange-500 min-h-[85px]";
-          domElements.targetSl.className = "text-[13px] price-font text-orange-400";
+          domElements.slSubcard.className = "bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-orange-500 min-h-[75px]";
+          domElements.targetSl.className = "text-[12px] price-font text-orange-400";
           
           domElements.tpLabel.innerText = "Take Profit (အမြတ်ယူဈေး - အောက်)";
-          domElements.tpSubcard.className = "bg-[#16181d] p-4 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-green-500 min-h-[85px]";
-          domElements.targetTp.className = "text-[13px] price-font text-green-400";
+          domElements.tpSubcard.className = "bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center border-l-2 border-l-green-500 min-h-[75px]";
+          domElements.targetTp.className = "text-[12px] price-font text-green-400";
         }
 
         domElements.targetBuy.innerText = `$${entry.toLocaleString(undefined, {maximumFractionDigits: decimalLimit})}`;
@@ -1020,7 +1008,7 @@
             slTriggered: false
           };
           domElements.targetAlertStatus.innerText = "🎯 TARGET ALERTS: READY";
-          domElements.targetAlertStatus.className = "text-[10px] bg-gray-900 text-gray-400 px-2 py-1 rounded border border-gray-800 font-bold";
+          domElements.targetAlertStatus.className = "text-[9px] bg-gray-900 text-gray-400 px-2 py-0.5 rounded border border-gray-800 font-bold";
         }
 
         // Live check to see if the current price crosses the monitored TP or SL
@@ -1030,26 +1018,26 @@
               currentTargets.slTriggered = true;
               playBeep('warning');
               domElements.targetAlertStatus.innerText = "⚠️ STOP LOSS TARGET TRIGGERED!";
-              domElements.targetAlertStatus.className = "text-[10px] bg-red-950 text-red-400 px-2 py-1 rounded border border-red-800 animate-pulse font-bold";
+              domElements.targetAlertStatus.className = "text-[9px] bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-800 animate-pulse font-bold";
             }
             else if (lastPrice >= currentTargets.tp && !currentTargets.tpTriggered) {
               currentTargets.tpTriggered = true;
               playBeep('success');
               domElements.targetAlertStatus.innerText = "🎉 TAKE PROFIT TARGET HIT!";
-              domElements.targetAlertStatus.className = "text-[10px] bg-green-950 text-green-400 px-2 py-1 rounded border border-green-800 animate-pulse font-bold";
+              domElements.targetAlertStatus.className = "text-[9px] bg-green-950 text-green-400 px-2 py-0.5 rounded border border-green-800 animate-pulse font-bold";
             }
           } else {
             if (lastPrice >= currentTargets.sl && !currentTargets.slTriggered) {
               currentTargets.slTriggered = true;
               playBeep('warning');
               domElements.targetAlertStatus.innerText = "⚠️ STOP LOSS TARGET TRIGGERED!";
-              domElements.targetAlertStatus.className = "text-[10px] bg-red-950 text-red-400 px-2 py-1 rounded border border-red-800 animate-pulse font-bold";
+              domElements.targetAlertStatus.className = "text-[9px] bg-red-950 text-red-400 px-2 py-0.5 rounded border border-red-800 animate-pulse font-bold";
             }
             else if (lastPrice <= currentTargets.tp && !currentTargets.tpTriggered) {
               currentTargets.tpTriggered = true;
               playBeep('success');
               domElements.targetAlertStatus.innerText = "🎉 TAKE PROFIT TARGET HIT!";
-              domElements.targetAlertStatus.className = "text-[10px] bg-green-950 text-green-400 px-2 py-1 rounded border border-green-800 animate-pulse font-bold";
+              domElements.targetAlertStatus.className = "text-[9px] bg-green-950 text-green-400 px-2 py-0.5 rounded border border-green-800 animate-pulse font-bold";
             }
           }
         }
@@ -1078,14 +1066,14 @@
 
       if (isLong) {
         domElements.gridRecommendType.innerText = "LONG GRID";
-        domElements.gridRecommendType.className = "text-[13px] text-green-400 uppercase font-black";
+        domElements.gridRecommendType.className = "text-[12px] text-green-400 uppercase font-black";
         const lower = price * multiplierLower;
         const upper = price * multiplierUpper;
         domElements.gridLowerPrice.innerText = `$${lower.toLocaleString(undefined, {maximumFractionDigits: decimals})}`;
         domElements.gridUpperPrice.innerText = `$${upper.toLocaleString(undefined, {maximumFractionDigits: decimals})}`;
       } else {
         domElements.gridRecommendType.innerText = "SHORT GRID";
-        domElements.gridRecommendType.className = "text-[13px] text-red-400 uppercase font-black";
+        domElements.gridRecommendType.className = "text-[12px] text-red-400 uppercase font-black";
         const lower = price * multiplierLower;
         const upper = price * multiplierUpper;
         domElements.gridLowerPrice.innerText = `$${lower.toLocaleString(undefined, {maximumFractionDigits: decimals})}`;
@@ -1099,15 +1087,15 @@
       domElements.gridConfidence.innerText = `${botConfidence}%`;
 
       if (botWinRate >= 80) {
-        domElements.gridWinRate.className = "text-[13px] font-black price-font text-emerald-400 neon-emerald";
+        domElements.gridWinRate.className = "text-[12px] font-black price-font text-emerald-400 neon-emerald";
       } else {
-        domElements.gridWinRate.className = "text-[13px] font-black price-font text-yellow-500 neon-yellow";
+        domElements.gridWinRate.className = "text-[12px] font-black price-font text-yellow-500 neon-yellow";
       }
 
       if (botConfidence >= 80) {
-        domElements.gridConfidence.className = "text-[13px] font-black price-font text-blue-400 neon-blue";
+        domElements.gridConfidence.className = "text-[12px] font-black price-font text-blue-400 neon-blue";
       } else {
-        domElements.gridConfidence.className = "text-[13px] font-black price-font text-yellow-500 neon-yellow";
+        domElements.gridConfidence.className = "text-[12px] font-black price-font text-yellow-500 neon-yellow";
       }
 
       domElements.gridCount.innerText = "40 - 75 Grids";
@@ -1184,7 +1172,6 @@
           <div class="space-y-4">
             <div class="h-10 shimmer rounded-lg w-full"></div>
             <div class="h-10 shimmer rounded-lg w-full"></div>
-            <div class="h-10 shimmer rounded-lg w-full"></div>
           </div>`;
       }
 
@@ -1247,7 +1234,7 @@
         useFallbackNews();
       } finally {
         if (forceRefresh) {
-          btn.innerText = "🔄 UPDATE LIVE NEWS NOW";
+          btn.innerText = "🔄 UPDATE LIVE NEWS";
           btn.disabled = false;
         }
       }
