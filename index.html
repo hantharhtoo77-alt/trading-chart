@@ -107,10 +107,11 @@
     <div class="flex flex-col xl:flex-row justify-between items-center bg-[#121318] p-4 md:p-5 rounded-2xl border border-[#1e2026] gap-4">
       <div class="text-center xl:text-left w-full xl:w-auto">
         <h1 class="text-xl md:text-2xl font-black bg-gradient-to-r from-[#f3ba2f] to-[#ffd700] bg-clip-text text-transparent tracking-wide leading-tight">
-        ဟန်သာ FUTURES & GRID BOT <span class="text-[10px] bg-yellow-500 text-black px-1.5 py-0.5 rounded ml-1 font-mono">PRO V19 MTF</span>
+         ဟန်သာ FUTURES & GRID BOT <span class="text-[10px] bg-yellow-500 text-black px-1.5 py-0.5 rounded ml-1 font-mono">PRO V19 MTF</span>
         </h1>
         <p class="text-[9px] md:text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">
-          Multi-Timeframe Analysis (15M, 1H, 4H) • Real-time Futures API • AI Strategy Advisor
+          Multi-Timeframe Analysis (15M, 1H, 4H)
+AI Strategy Advisor
         </p>
       </div>
       <!-- Sound Switcher & Coin Selector -->
@@ -158,7 +159,7 @@
         <!-- B. Multi-Timeframe Matrix Section -->
         <div class="flex flex-col flex-grow justify-between">
           <h3 class="text-[10px] uppercase tracking-wider text-indigo-400 font-extrabold mb-2 flex items-center gap-1.5">
-            <span>📊</span> MULTI-TIMEFRAME MATRIX (အကွက်ချသုံးသပ်ချက်)
+            <span>📊</span> MULTI-TIMEFRAME MATRIX သုံးသပ်ချက်
           </h3>
           
           <div class="space-y-2 flex flex-col justify-between h-full">
@@ -241,7 +242,7 @@
         </h2>
         <span id="target-alert-status" class="text-[9px] bg-gray-900 text-gray-400 px-2 py-0.5 rounded border border-gray-800 font-bold">🎯 TARGET ALERTS: READY</span>
       </div>
-      <!-- Grid Layout: Responsive 2, 3, 6 columns -->
+      <!-- Grid Layout: Swapped "Take Profit" to #4 and "Confidence" to #5 -->
       <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 text-xs font-bold text-center">
         <!-- 1. Trading Direction -->
         <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
@@ -257,25 +258,25 @@
         
         <!-- 3. Dynamic Win Rate % -->
         <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
-          <span class="text-gray-500 uppercase text-[9px] mb-1">Est. Win Rate (အမြတ်ရနိုင်ခြေ)</span>
+          <span class="text-gray-500 uppercase text-[9px] mb-1">Est. Win Rate </span>
           <span id="win-rate" class="text-[12px] font-black price-font text-emerald-400 neon-emerald">--%</span>
         </div>
 
-        <!-- 4. Entry Confidence Score -->
-        <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
-          <span class="text-gray-500 uppercase text-[9px] mb-1">တိကျသေချာမှု (Confidence)</span>
-          <span id="entry-confidence" class="text-[12px] font-black price-font text-blue-400 neon-blue">--%</span>
+        <!-- 4. Take Profit (Swapped to position #4) -->
+        <div id="tp-subcard" class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
+          <span id="tp-label" class="text-gray-500 uppercase text-[9px] mb-1">Take Profit </span>
+          <span id="target-tp" class="text-[12px] price-font text-blue-400">$ --,---</span>
         </div>
 
-        <!-- 5. Take Profit -->
-        <div id="tp-subcard" class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
-          <span id="tp-label" class="text-gray-500 uppercase text-[9px] mb-1">Take Profit (အမြတ်ယူဈေး)</span>
-          <span id="target-tp" class="text-[12px] price-font text-blue-400">$ --,---</span>
+        <!-- 5. Entry Confidence Score (Swapped to position #5) -->
+        <div class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
+          <span class="text-gray-500 uppercase text-[9px] mb-1">တိကျသေချာမှု </span>
+          <span id="entry-confidence" class="text-[12px] font-black price-font text-blue-400 neon-blue">--%</span>
         </div>
 
         <!-- 6. Stop Loss -->
         <div id="sl-subcard" class="bg-[#16181d] p-3 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
-          <span id="sl-label" class="text-gray-500 uppercase text-[9px] mb-1">Stop Loss (ရှုံးရင်ဖြတ်ဈေး)</span>
+          <span id="sl-label" class="text-gray-500 uppercase text-[9px] mb-1">Stop Loss </span>
           <span id="target-sl" class="text-[12px] price-font text-red-400">$ --,---</span>
         </div>
       </div>
@@ -286,7 +287,7 @@
       <h2 class="text-xs md:text-sm font-bold text-teal-400 mb-4 flex items-center gap-2">
         <span>🤖</span> Live Futures Grid Bot Strategy (အလိုအလျောက် ကုန်သွယ်မှုသတ်မှတ်ချက်များ)
       </h2>
-      <!-- Grid Layout: Responsive 2, 4, 7 columns -->
+      <!-- Grid Layout: Swapped "Grid Win Rate" to #3 and "Upper Price" to #4 -->
       <div class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-7 gap-3 text-xs font-bold text-center">
         <!-- 1. Grid Type -->
         <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
@@ -299,17 +300,17 @@
           <span class="text-gray-500 uppercase text-[9px] mb-1">Lower Price (အနိမ့်ဆုံး)</span>
           <span id="grid-lower-price" class="text-[12px] text-green-400 font-mono">$ --,---</span>
         </div>
-        
-        <!-- 3. Upper Price -->
-        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
-          <span class="text-gray-500 uppercase text-[9px] mb-1">Upper Price (အမြင့်ဆုံး)</span>
-          <span id="grid-upper-price" class="text-[12px] text-red-400 font-mono">$ --,---</span>
-        </div>
 
-        <!-- 4. Grid Win Rate -->
+        <!-- 3. Grid Win Rate (Swapped to position #3) -->
         <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
           <span class="text-gray-500 uppercase text-[9px] mb-1">Grid Win Rate</span>
           <span id="grid-win-rate" class="text-[12px] font-black price-font text-emerald-400 neon-emerald">--%</span>
+        </div>
+        
+        <!-- 4. Upper Price (Swapped to position #4) -->
+        <div class="bg-[#16181d] p-3.5 rounded-xl border border-gray-800/45 flex flex-col justify-center items-center min-h-[75px]">
+          <span class="text-gray-500 uppercase text-[9px] mb-1">Upper Price (အမြင့်ဆုံး)</span>
+          <span id="grid-upper-price" class="text-[12px] text-red-400 font-mono">$ --,---</span>
         </div>
 
         <!-- 5. Grid Confidence -->
@@ -616,7 +617,7 @@
       ],
       "ETHUSDT": [
         "Ethereum Layer-2 ကွန်ရက်များ၏ အရောင်းအဝယ်ပမာဏသည် စံချိန်တင် မြင့်တက်လာပြီး ဓာတ်ငွေ့ခ (Gas fee) ကျဆင်း။",
-        "အမေရိကန် SEC က Ethereum Staking ဝန်ဆောင်မှုပေးသည့် လုပ်ငန်းကြီးများအတွက် ဥပဒေဆိုင်ရာ လမ်းညွှချက်သစ် ထုတ်ပြန်။",
+        "အမေရိကန် SEC က Ethereum Staking ဝန်ဆောင်မှုပေးသည့် လုပ်ငန်းကြီးများအတွက် ဥပဒေဆိုင်ရာ လမ်းညွှန်ချက်သစ် ထုတ်ပြန်။",
         "ရင်းနှီးမြှုပ်နှံမှု အဖွဲ့အစည်းကြီးများက လွန်ခဲ့သော ၂ နာရီအတွင်း ETH အဝယ်စုဆောင်းမှု သိသိသာသာ တိုးမြှင့်ခဲ့။"
       ],
       "SOLUSDT": [
@@ -1268,4 +1269,4 @@
 </body>
 </html>
 
-```
+အမြတ်တွေအများကြီးရရှိပါစေ
